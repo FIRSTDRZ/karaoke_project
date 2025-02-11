@@ -48,6 +48,7 @@ int main() {
 
     if (choice == 6) {
         cout<<"thank you for using our service"<<endl;
+        cout << "==========================" ;
         return 0;
     }
     return 0;
