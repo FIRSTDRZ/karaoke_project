@@ -46,7 +46,12 @@ int main() {
         cin>>choice_room;
     }
 
-    if (choice == 6) return 0;
+    if (choice == 6) {
+        cout<<"thank you for using our service"<<endl;
+        return 0;
+    }
     return 0;
+
+
 }
     
