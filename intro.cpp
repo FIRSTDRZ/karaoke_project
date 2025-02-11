@@ -1,6 +1,7 @@
 #include<iostream>
 #include <string>
-
+#include <thread> 
+#include <chrono>
 
 
 using namespace std;
@@ -9,7 +10,23 @@ void press_enter() {
     cin.get();
     system("clear");
 }
+void printIntro() {
+    string ascii_art =
+    "_____  _____    ____       _ ______ _____ _______ \n"
+    "|  __ \\|  __ \\ / __ \\     | |  ____/ ____|__   __|\n"
+    "| |__) | |__) | |  | |    | | |__ | |       | |\n"   
+    "|  ___/|  _  /| |  | |_   | |  __|| |       | |\n"   
+    "| |    | | \\ \\| |__| | |__| | |___| |____   | |\n"   
+    "|_|    |_|  \\_\\\\____/ \\____/|______\\_____|  |_|\n";   
+                                                      
+                                                      
+   
+    cout << ascii_art << endl;
+}
+
 void intro(){
+    printIntro();
+    press_enter();
     cout<<"=========================="<<endl;
     cout<<"Hello Welcome to My Karoke"<<endl;
     cout<<"Here are our services"<<endl;
