@@ -33,8 +33,20 @@ int main() {
         cout<<"Please choose the service you want to use: ";
         int choice_member;
         cin>>choice_member;
-        
     }
+
+    if (choice == 2) {
+        cout<<"=========================="<<endl;
+        cout<<"Here are our rooms"<<endl;
+        cout<<"Small Room(1)"<<endl;
+        cout<<"Medium Room(2)"<<endl;
+        cout<<"Large Room(3)"<<endl;
+        cout<<"Please choose the room you want to book: ";
+        int choice_room;
+        cin>>choice_room;
+    }
+
+    if (choice == 6) return 0;
     return 0;
 }
     
