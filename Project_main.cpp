@@ -4,10 +4,11 @@
 #include<cstdlib>
 #include<ctime>
 #include<vector>
-#include "intro.cpp"
+#include<chrono>
+#include<thread>
+#include"intro.cpp"
+//#include"open.cpp"
 using namespace std;
-
-void enter_memberships(int n) ;
 
 int main() {
     intro();
@@ -43,8 +44,15 @@ int main() {
         cout <<"======================================" << endl;
         return 0;
     }
+
+
+    
+    
+    
+    
+    
+    
+    
     return 0;
-
-
 }
     
