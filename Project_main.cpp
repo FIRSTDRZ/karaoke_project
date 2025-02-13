@@ -5,26 +5,34 @@
 #include<ctime>
 #include<vector>
 #include "intro.cpp"
+#include "Membership.cpp"
 using namespace std;
 
-void enter_memberships(int n) ;
+class User{
+    public:
+            int id,password;
+            string booking_code;
+
+    private:
+};
+
+class Admin{
+    public:
+           int id,password;
+
+
+    private:
+
+};
+
 
 int main() {
     intro();
     
     int choice;
     cin>>choice;   
-    if (choice == 3 ) {
-        cout<<"=========================="<<endl;
-        cout<<"Here are our memberships"<<endl;
-        cout<<"New Membership(1)"<<endl;
-        cout<<"Log in Membership(2)"<<endl;
-        cout<<"Edit Membership(3)"<<endl;
-        cout<<"Please choose the service you want to use: ";
-        int choice_member;
-        cin>>choice_member;
-    }
-
+    //if (choice == 3 ) Membership(); // fixing 
+   
     if (choice == 2) {
         cout<<"=========================="<<endl;
         cout<<"Here are our rooms"<<endl;
