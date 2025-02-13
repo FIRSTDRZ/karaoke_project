@@ -11,6 +11,7 @@ void enter_memberships(int n) ;
 
 int main() {
     intro();
+    
     int choice;
     cin>>choice;   
     if (choice == 3 ) {

@@ -1,7 +1,6 @@
 #include<iostream>
 #include <string>
-#include <thread> 
-#include <chrono>
+
 
 
 using namespace std;
@@ -22,6 +21,9 @@ void printIntro() {
                                                       
    
     cout << ascii_art << endl;
+    cout<<"\n";
+    cout<<"\n";
+    cout<<"\n";
 }
 
 void intro(){
