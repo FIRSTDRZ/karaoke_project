@@ -7,9 +7,8 @@
 #include<chrono>
 #include<thread>
 #include"intro.cpp"
-#include "Membership.cpp"
+#include"Membership.cpp"
 using namespace std;
-
 class User{
     public:
             int id,password;
@@ -26,7 +25,6 @@ class Admin{
     private:
 
 };
-
 
 int main() {
     intro();
