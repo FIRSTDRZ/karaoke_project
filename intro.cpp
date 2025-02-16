@@ -2,7 +2,6 @@
 #include<string>
 #include"admin.cpp"
 
-
 using namespace std;
 void press_enter() {
     cout<<"Press Enter to continue...";
@@ -56,6 +55,8 @@ void intro(){
             cout<<"\n";
             cout<<"\n";
             press_enter();
+            KaraokeAdmin admin;
+            admin.adminMenu();
             loopcheck1 = 1;
         }
         else if (user_type == 2){
