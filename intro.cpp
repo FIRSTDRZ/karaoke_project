@@ -38,7 +38,7 @@ void intro(){
     cout<<"\n";
     cout<<"\n";
     press_enter();
-    system("clear");
+    system("clear");  //clear' is not recognized as an internal or external command
     int loopcheck1 = 0;
     while (loopcheck1 == 0){
         cout<<"=========================="<<endl;
