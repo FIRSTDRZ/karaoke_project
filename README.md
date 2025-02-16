@@ -4,12 +4,10 @@
 
 .・。.・゜✭・.・✫・゜・。.・。.・゜✭・.・✫・゜・。.
 
-▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄  
-█  J E N G K A B B E S T K A B  █  
-█  F I R S T K A B Y E W K A B  █  
-█  K O N G K A B I C E E A K    █  
-█  N E U N G K O N              █  
-▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ 
+J E N G K A B B E S T K A B   
+F I R S T K A B Y E W K A B  
+K O N G K A B I C E 
+E A K N E U N G K O N      
 
 .・。.・゜✭・.・✫・゜・。.・。.・゜✭・.・✫・゜・。.
 
