@@ -1,13 +1,10 @@
-#include<iostream>
-#include<string>
-#include<ctime>
-#include<vector>
-
+#include <iostream>
+#include <string>
 using namespace std;
 
 class KaraokeAdmin {
 private:
-    const string ADMIN_PASSWORD = "admin123";
+    const string ADMIN_PASSWORD = "admin123"; // รหัสผ่านที่กำหนดไว้ล่วงหน้า
     
     // โครงสร้างข้อมูลสำหรับห้อง
     struct RoomSettings {
@@ -42,7 +39,6 @@ public:
         
         int choice;
         do {
-
             cout << "\n=== เมนู Admin ===\n";
             cout << "1. ตั้งค่าจำนวนห้อง\n";
             cout << "2. ตั้งค่าความจุห้อง\n";
@@ -75,7 +71,7 @@ public:
                 default:
                     cout << "เมนูไม่ถูกต้อง กรุณาเลือกใหม่\n";
             }
-        } while (choice != 0) ; system("clear"); cout<<"thank you admin"<<endl;
+        } while (choice != 0);
     }
     
 private:
