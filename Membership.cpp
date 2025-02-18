@@ -101,9 +101,10 @@ void new_membership() {
 void login_membership() {
     string name, password;
     cout << "Enter your name: ";
-    cin >> name;
+    cin.ignore();
+    getline(cin, name);
     cout << "Enter your password: ";
-    cin >> password;
+    getline(cin, password);
 
     // Load existing members
     vector<Member> members = loadMembers();
@@ -119,23 +120,37 @@ void login_membership() {
 }
 
 // Function to edit a membership
-void edit_membership() {
+void edit_membership() {     //เพิ่มcode confirm ในการแก้ไขรหัสผ่านและเบอร์โทรศัพท์
     string name, password,newTelephone;
     cout << "Enter your name: ";
-    cin >> name;
+    cin.ignore();
+    getline(cin, name);
     cout << "Enter your password: ";
-    cin >> password;
-
+    getline(cin, password);
     // Load existing members
     vector<Member> members = loadMembers();
 
     // Find the member and verify the password
     for (auto &member : members) {
         if (member.getName() == name && member.getPassword() == password) {
-            cout << "Enter new telephone number: ";
-            cin >> newTelephone;
-            member.setTelephone(newTelephone);
-            saveMembers(members);
+            cout<<"Edit password (1) or telephone number (2): ";
+            int choice;
+            cin>>choice;
+            if(choice==1){
+                cout << "Enter new password: ";
+                cin >> password;
+                member.setPassword(password);
+            }
+            else if(choice==2){
+                cout << "Enter new telephone number: ";
+                cin >> newTelephone;
+                member.setTelephone(newTelephone);
+            }
+            else{
+                cout<<"Please select (1) or (2)"<<endl;
+                cin>>choice;
+            }      
+            saveMembers(members);      
             cout << "Membership updated successfully!" << endl;
             return;
         }
@@ -153,7 +168,7 @@ int main() {
         cout << "Exit (4)" << endl;
         cout << "Please choose the service you want to use: ";
         int choice_member;
-        cin >> choice_member;
+        cin >> choice_member;    // แก้ cin เป็น get line(หาวิธีแปลง string เป็น int)
 
         switch (choice_member) {
             case 1:
