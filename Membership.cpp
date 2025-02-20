@@ -120,7 +120,7 @@ void login_membership() {
 }
 
 // Function to edit a membership
-void edit_membership() {     //เพิ่มcode confirm ในการแก้ไขรหัสผ่านและเบอร์โทรศัพท์
+void edit_membership() {     
     string name, password,newTelephone;
     cout << "Enter your name: ";
     cin.ignore();
@@ -168,7 +168,7 @@ int main() {
         cout << "Exit (4)" << endl;
         cout << "Please choose the service you want to use: ";
         int choice_member;
-        cin >> choice_member;    // แก้ cin เป็น get line(หาวิธีแปลง string เป็น int)
+        cin >> choice_member;    
 
         switch (choice_member) {
             case 1:
