@@ -3,10 +3,8 @@
 using namespace std;
 
 class KaraokeAdmin {
-private:
-    const string ADMIN_PASSWORD = "admin123"; // รหัสผ่านที่กำหนดไว้ล่วงหน้า
-    
-    // โครงสร้างข้อมูลสำหรับห้อง
+public:
+    // โครงสร้างข้อมูลสำหรับห้อง (public เพื่อให้คลาสอื่นเข้าถึงโครงสร้างได้)
     struct RoomSettings {
         int smallRoomCount = 0;
         int mediumRoomCount = 0;
@@ -20,15 +18,27 @@ private:
         int openingHour = 0;
         int closingHour = 0;
     };
-    
-    RoomSettings settings;
+
+private:
+    const string ADMIN_PASSWORD = "admin123"; // รหัสผ่านที่กำหนดไว้ล่วงหน้า
+    static RoomSettings defaultSettings; // ตั้งค่าเริ่มต้นของห้อง
+    RoomSettings settings; // เก็บการตั้งค่าเป็น private
+    bool isLoggedIn = false;
 
 public:
+    // ฟังก์ชันสำหรับเริ่มการทำงานของ Admin และคืนค่าการตั้งค่าเมื่อเสร็จสิ้น
+    RoomSettings startAdmin() {
+        adminMenu();
+        return settings;
+    }
+
+
     bool login() {
         string password;
         cout << "กรุณาใส่รหัสผ่าน Admin: ";
         cin >> password;
-        return password == ADMIN_PASSWORD;
+        isLoggedIn = (password == ADMIN_PASSWORD);
+        return isLoggedIn;
     }
     
     void adminMenu() {
@@ -67,6 +77,7 @@ public:
                     break;
                 case 0:
                     cout << "ออกจากเมนู Admin\n";
+                    isLoggedIn = false; // logout เมื่อออกจากเมนู
                     break;
                 default:
                     cout << "เมนูไม่ถูกต้อง กรุณาเลือกใหม่\n";
@@ -74,8 +85,8 @@ public:
         } while (choice != 0);
     }
     
-private:
     void setRoomCounts() {
+        system("clear");
         cout << "\n=== ตั้งค่าจำนวนห้อง ===\n";
         cout << "จำนวนห้องเล็ก: ";
         cin >> settings.smallRoomCount;
@@ -86,6 +97,7 @@ private:
     }
     
     void setRoomCapacities() {
+        system("clear");
         cout << "\n=== ตั้งค่าความจุห้อง (จำนวนคน) ===\n";
         cout << "ความจุห้องเล็ก: ";
         cin >> settings.smallRoomCapacity;
@@ -96,6 +108,7 @@ private:
     }
     
     void setRoomPrices() {
+        system("clear");
         cout << "\n=== ตั้งค่าราคาห้องต่อชั่วโมง ===\n";
         cout << "ราคาห้องเล็ก: ";
         cin >> settings.smallRoomPrice;
@@ -106,6 +119,7 @@ private:
     }
     
     void setOperatingHours() {
+        system("clear");
         cout << "\n=== ตั้งค่าเวลาเปิด-ปิด ===\n";
         do {
             cout << "เวลาเปิด (0-23): ";
@@ -120,6 +134,7 @@ private:
     }
     
     void displaySettings() {
+        system("clear");
         cout << "\n=== การตั้งค่าทั้งหมด ===\n";
         cout << "จำนวนห้อง:\n";
         cout << "  ห้องเล็ก: " << settings.smallRoomCount << " ห้อง\n";
