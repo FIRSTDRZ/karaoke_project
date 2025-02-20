@@ -1,6 +1,6 @@
 #include<iostream>
 #include<string>
-#include"admin.cpp"
+
 
 using namespace std;
 void press_enter() {
@@ -24,6 +24,38 @@ void printIntro() {
     cout<<"\n";
     cout<<"\n";
 }
+void admin(){
+    system("clear");
+    cout<<"=========================="<<endl;
+    cout<<"Hello Admin"<<endl;
+    cout<<"Here are your services"<<endl;
+    cout<<"=========================="<<endl;
+    cout<<"\n";
+    cout<<"\n";
+    press_enter();
+}
+void user(){
+    system("clear");
+    cout<<"=========================="<<endl;
+    cout<<"\n";
+    cout<<"Hello User"<<endl;
+    cout<<"Here are your services"<<endl;
+    cout<<"\n";
+    cout<<"=========================="<<endl;
+    cout<<"\n";
+    cout<<"Booking(1)"<<endl;
+    cout<<"Type of Room(2)"<<endl;
+    cout<<"Memberships(3)"<<endl;
+    cout<<"Show Queue(4)"<<endl;
+    cout<<"Cancel Booking(5)"<<endl;
+    cout<<"Log out(6)"<<endl;
+    cout<<"\n";
+    cout<<"=========================="<<endl;
+    cout<<"\n";
+    cout<<"\n";
+    cout<<"\n";
+    cout<<"Please choose the service you want to use: ";
+}
 
 void intro(){
     printIntro();
@@ -38,59 +70,4 @@ void intro(){
     cout<<"\n";
     press_enter();
     system("clear");  //clear' is not recognized as an internal or external command
-    int loopcheck1 = 0;
-    while (loopcheck1 == 0){
-        cout<<"=========================="<<endl;
-        cout<<"Are you an Admin or a User ?? "<<endl;
-        int  user_type;
-        cout<<"Admin(1)"<<" "<<"User(2)"<<endl;
-        cout<<"Please choose the type of user you are: ";
-        cin >> user_type;
-        if (user_type == 1){
-            system("clear");
-            cout<<"=========================="<<endl;
-            cout<<"Hello Admin"<<endl;
-            cout<<"Here are your services"<<endl;
-            cout<<"=========================="<<endl;
-            cout<<"\n";
-            cout<<"\n";
-            press_enter();
-            KaraokeAdmin admin;
-            admin.adminMenu();
-            loopcheck1 = 1;
-        }
-        else if (user_type == 2){
-            system("clear");
-            cout<<"=========================="<<endl;
-            cout<<"Hello User"<<endl;
-            cout<<"Here are your services"<<endl;
-            cout<<"=========================="<<endl;
-            cout<<"\n";
-            cout<<"\n";
-            cout<<"=========================="<<endl;
-            cout<<"Booking(1)"<<endl;
-            cout<<"Type of Room(2)"<<endl;
-            cout<<"Memberships(3)"<<endl;
-            cout<<"Show Queue(4)"<<endl;
-            cout<<"Cancel Booking(5)"<<endl;
-            cout<<"Log out(6)"<<endl;
-            cout<<"\n";
-            cout<<"=========================="<<endl;
-            cout<<"\n";
-            cout<<"\n";
-            cout<<"\n";
-            cout<<"Please choose the service you want to use: ";
-            loopcheck1 = 1;
-        }
-        else{
-            system("clear");
-            cout<<"Invalid input"<<endl;
-
-        }
-    }
-
-}
-int main() {
-    intro();
-    return 0;
 }
