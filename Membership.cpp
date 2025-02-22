@@ -71,12 +71,12 @@ void saveMembers(const vector<Member> &members) {
 // Function to create a new membership
 void new_membership() {
     string name, password, telephone;
-    cout << "ชื่อผู้ใช้: ";
+    cout << "Enter your username: ";
     cin.ignore();
     getline(cin, name);
-    cout << "รหัสผ่าน: ";
+    cout << "Enter your password: ";
     getline(cin, password);
-    cout << "เบอร์โทรศัพท์มือถือ: ";
+    cout << "Enter your telephone number: ";
     getline(cin, telephone);
 
     // Load existing members
@@ -85,7 +85,7 @@ void new_membership() {
     // Check if the member already exists
     for (const auto &member : members) {
         if (member.getName() == name) {
-            cout << "เป็นสมาชิกอยู่แล้ว!" << endl;
+            cout << "Member already exists!!" << endl;
             return;
         }
     }
@@ -93,16 +93,16 @@ void new_membership() {
     // Add new member
     members.push_back(Member(name, password, telephone));
     saveMembers(members);
-    cout << "สมัครสมาชิกใหม่สำเร็จ!" << endl;
+    cout << "New membership created successfully!" << endl;
 }
 
 // Function to log in to a membership
 void login_membership() {
     string name, password;
-    cout << "ชื่อผู้ใช้: ";
+    cout << "Enter your username: ";
     cin.ignore();
     getline(cin, name);
-    cout << "รหัสผ่าน: ";
+    cout << "Enter your password: ";
     getline(cin, password);
 
     // Load existing members
@@ -111,20 +111,20 @@ void login_membership() {
     // Check if the member exists and the password is correct
     for (const auto &member : members) {
         if (member.getName() == name && member.getPassword() == password) {
-            cout << "ล็อคอิน สำเร็จ! ยินดีต้อนรับ, " << member.getName() << "!" << endl;
+            cout << "Login successful! Welcome, " << member.getName() << "!" << endl;
             return;
         }
     }
-    cout << "ชื่อผู้ใช้หรือรหัสผ่านผู้ใช้ผิด!" << endl;
+    cout << "Invalid name or password!" << endl;
 }
 
 // Function to edit a membership
 void edit_membership() {     
     string name, password,newTelephone;
-    cout << "ชื่อผู้ใช้: ";
+    cout << "Enter your username: ";
     cin.ignore();
     getline(cin, name);
-    cout << "รหัสผ่าน: ";
+    cout << "Enter your password: ";
     getline(cin, password);
     // Load existing members
     vector<Member> members = loadMembers();
@@ -132,58 +132,58 @@ void edit_membership() {
     // Find the member and verify the password
     for (auto &member : members) {
         if (member.getName() == name && member.getPassword() == password) {
-            cout<<"แก้ไขรหัสผ่าน (1) หรือ เบอร์โทรศัพท์มือถือ (2): ";
+            cout<<"Edit password (1) or telephone number (2): ";
             int choice;
             cin>>choice;
             if(choice==1){
-                cout << "กรอกรหัสผ่านใหม่: ";
+                cout << "Enter your new password: ";
                 cin >> password;
                 member.setPassword(password);
             }
             else if(choice==2){
-                cout << "กรอกเบอร์โทรศัพท์มือถือใหม่: ";
+                cout << "Enter your new telephone number: ";
                 cin >> newTelephone;
                 member.setTelephone(newTelephone);
             }
             else{
-                cout<<"โปรดเลือก (1) หรือ (2)"<<endl;
+                cout<<"Please choose (1) or (2)"<<endl;
                 cin>>choice;
             }      
             saveMembers(members);      
-            cout << "สมาชิกมีการเปลี่ยนแปลง สำเร็จ!" << endl;
+            cout << "Membership updated successfully!" << endl;
             return;
         }
     }
-    cout << "ชื่อผู้ใช้หรือรหัสผ่านผู้ใช้ผิด!" << endl;
+    cout << "Invalid name or password!" << endl;
 }
 
-int main() {
-    while (true) {
-        cout << "==========================" << endl;
-        cout << "นี่คือบริการสำหรับสมาชิกของเรา\n";
-        cout << "สมัครสมาชิกใหม่ (1)" << endl;
-        cout << "ล็อคอินเข้าสู่ระบบ (2)" << endl;
-        cout << "แก้ไขสมาชิก (3)" << endl;
-        cout << "ออก (4)" << endl;
-        cout << "โปรดเลือกบริการที่คุณต้องการ: ";
-        int choice_member;
-        cin >> choice_member;    
+// int main() {
+//     while (true) {
+//         cout << "==========================" << endl;
+//         cout << "นี่คือบริการสำหรับสมาชิกของเรา\n";
+//         cout << "สมัครสมาชิกใหม่ (1)" << endl;
+//         cout << "ล็อคอินเข้าสู่ระบบ (2)" << endl;
+//         cout << "แก้ไขสมาชิก (3)" << endl;
+//         cout << "ออก (4)" << endl;
+//         cout << "โปรดเลือกบริการที่คุณต้องการ: ";
+//         int choice_member;
+//         cin >> choice_member;    
 
-        switch (choice_member) {
-            case 1:
-                new_membership();
-                break;
-            case 2:
-                login_membership();
-                break;
-            case 3:
-                edit_membership();
-                break;
-            case 4:
-                cout << "Exiting the program. Goodbye!" << endl;
-                return 0;
-            default:
-                cout << "Invalid choice! Please try again." << endl;
-        }
-    }
-}
+//         switch (choice_member) {
+//             case 1:
+//                 new_membership();
+//                 break;
+//             case 2:
+//                 login_membership();
+//                 break;
+//             case 3:
+//                 edit_membership();
+//                 break;
+//             case 4:
+//                 cout << "Exiting the program. Goodbye!" << endl;
+//                 return 0;
+//             default:
+//                 cout << "Invalid choice! Please try again." << endl;
+//         }
+//     }
+// }
