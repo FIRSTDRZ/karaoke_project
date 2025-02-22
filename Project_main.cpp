@@ -7,7 +7,6 @@
 #include<chrono>
 #include<thread>
 #include"intro.cpp"
-//#include"Membership.cpp"
 using namespace std;
 
 class KaraokeAdmin {
@@ -29,9 +28,8 @@ class KaraokeAdmin {
     
     private:
         const string ADMIN_PASSWORD = "admin123"; // รหัสผ่านที่กำหนดไว้ล่วงหน้า
-    public:
         static RoomSettings defaultSettings; // ตั้งค่าเริ่มต้นของห้อง
-        RoomSettings settings;
+        RoomSettings settings; // เก็บการตั้งค่าเป็น private
         bool isLoggedIn = false;
     
     public:
@@ -178,7 +176,10 @@ void adminoruser (){
         cin >> user_type;
         if (user_type == 1){
             admin();
+            KaraokeAdmin admin;
+            admin.startAdmin();
             loopcheck1 = 1;
+            adminoruser();
         }
         else if (user_type == 2){
             user();
@@ -197,9 +198,7 @@ int main() {
     system("clear");
     intro();
     adminoruser();
-    KaraokeAdmin admin;
-    KaraokeAdmin::RoomSettings settings = admin.startAdmin();
-    cout<<settings.mediumRoomPrice;
+
     int choice;
     cin>>choice;   
     

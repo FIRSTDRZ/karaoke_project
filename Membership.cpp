@@ -1,4 +1,3 @@
-//ต้องแก้ cin เป็น get line และเพิ่มการเรียกใช้งานฟังก์ชัน Membership ใน main 
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -72,7 +71,7 @@ void saveMembers(const vector<Member> &members) {
 // Function to create a new membership
 void new_membership() {
     string name, password, telephone;
-    cout << "Enter your name: ";
+    cout << "Enter your username: ";
     cin.ignore();
     getline(cin, name);
     cout << "Enter your password: ";
@@ -86,7 +85,7 @@ void new_membership() {
     // Check if the member already exists
     for (const auto &member : members) {
         if (member.getName() == name) {
-            cout << "Member already exists!" << endl;
+            cout << "Member already exists!!" << endl;
             return;
         }
     }
@@ -100,7 +99,7 @@ void new_membership() {
 // Function to log in to a membership
 void login_membership() {
     string name, password;
-    cout << "Enter your name: ";
+    cout << "Enter your username: ";
     cin.ignore();
     getline(cin, name);
     cout << "Enter your password: ";
@@ -122,7 +121,7 @@ void login_membership() {
 // Function to edit a membership
 void edit_membership() {     
     string name, password,newTelephone;
-    cout << "Enter your name: ";
+    cout << "Enter your username: ";
     cin.ignore();
     getline(cin, name);
     cout << "Enter your password: ";
@@ -137,17 +136,17 @@ void edit_membership() {
             int choice;
             cin>>choice;
             if(choice==1){
-                cout << "Enter new password: ";
+                cout << "Enter your new password: ";
                 cin >> password;
                 member.setPassword(password);
             }
             else if(choice==2){
-                cout << "Enter new telephone number: ";
+                cout << "Enter your new telephone number: ";
                 cin >> newTelephone;
                 member.setTelephone(newTelephone);
             }
             else{
-                cout<<"Please select (1) or (2)"<<endl;
+                cout<<"Please choose (1) or (2)"<<endl;
                 cin>>choice;
             }      
             saveMembers(members);      
@@ -158,33 +157,33 @@ void edit_membership() {
     cout << "Invalid name or password!" << endl;
 }
 
-int main() {
-    while (true) {
-        cout << "==========================" << endl;
-        cout << "Here are our memberships" << endl;
-        cout << "New Membership (1)" << endl;
-        cout << "Log in Membership (2)" << endl;
-        cout << "Edit Membership (3)" << endl;
-        cout << "Exit (4)" << endl;
-        cout << "Please choose the service you want to use: ";
-        int choice_member;
-        cin >> choice_member;    
+// int main() {
+//     while (true) {
+//         cout << "==========================" << endl;
+//         cout << "นี่คือบริการสำหรับสมาชิกของเรา\n";
+//         cout << "สมัครสมาชิกใหม่ (1)" << endl;
+//         cout << "ล็อคอินเข้าสู่ระบบ (2)" << endl;
+//         cout << "แก้ไขสมาชิก (3)" << endl;
+//         cout << "ออก (4)" << endl;
+//         cout << "โปรดเลือกบริการที่คุณต้องการ: ";
+//         int choice_member;
+//         cin >> choice_member;    
 
-        switch (choice_member) {
-            case 1:
-                new_membership();
-                break;
-            case 2:
-                login_membership();
-                break;
-            case 3:
-                edit_membership();
-                break;
-            case 4:
-                cout << "Exiting the program. Goodbye!" << endl;
-                return 0;
-            default:
-                cout << "Invalid choice! Please try again." << endl;
-        }
-    }
-}
+//         switch (choice_member) {
+//             case 1:
+//                 new_membership();
+//                 break;
+//             case 2:
+//                 login_membership();
+//                 break;
+//             case 3:
+//                 edit_membership();
+//                 break;
+//             case 4:
+//                 cout << "Exiting the program. Goodbye!" << endl;
+//                 return 0;
+//             default:
+//                 cout << "Invalid choice! Please try again." << endl;
+//         }
+//     }
+// }
