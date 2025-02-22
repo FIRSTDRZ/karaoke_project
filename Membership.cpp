@@ -1,4 +1,3 @@
-//ต้องแก้ cin เป็น get line และเพิ่มการเรียกใช้งานฟังก์ชัน Membership ใน main 
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -72,12 +71,12 @@ void saveMembers(const vector<Member> &members) {
 // Function to create a new membership
 void new_membership() {
     string name, password, telephone;
-    cout << "Enter your name: ";
+    cout << "ชื่อผู้ใช้: ";
     cin.ignore();
     getline(cin, name);
-    cout << "Enter your password: ";
+    cout << "รหัสผ่าน: ";
     getline(cin, password);
-    cout << "Enter your telephone number: ";
+    cout << "เบอร์โทรศัพท์มือถือ: ";
     getline(cin, telephone);
 
     // Load existing members
@@ -86,7 +85,7 @@ void new_membership() {
     // Check if the member already exists
     for (const auto &member : members) {
         if (member.getName() == name) {
-            cout << "Member already exists!" << endl;
+            cout << "เป็นสมาชิกอยู่แล้ว!" << endl;
             return;
         }
     }
@@ -94,16 +93,16 @@ void new_membership() {
     // Add new member
     members.push_back(Member(name, password, telephone));
     saveMembers(members);
-    cout << "New membership created successfully!" << endl;
+    cout << "สมัครสมาชิกใหม่สำเร็จ!" << endl;
 }
 
 // Function to log in to a membership
 void login_membership() {
     string name, password;
-    cout << "Enter your name: ";
+    cout << "ชื่อผู้ใช้: ";
     cin.ignore();
     getline(cin, name);
-    cout << "Enter your password: ";
+    cout << "รหัสผ่าน: ";
     getline(cin, password);
 
     // Load existing members
@@ -112,20 +111,20 @@ void login_membership() {
     // Check if the member exists and the password is correct
     for (const auto &member : members) {
         if (member.getName() == name && member.getPassword() == password) {
-            cout << "Login successful! Welcome, " << member.getName() << "!" << endl;
+            cout << "ล็อคอิน สำเร็จ! ยินดีต้อนรับ, " << member.getName() << "!" << endl;
             return;
         }
     }
-    cout << "Invalid name or password!" << endl;
+    cout << "ชื่อผู้ใช้หรือรหัสผ่านผู้ใช้ผิด!" << endl;
 }
 
 // Function to edit a membership
 void edit_membership() {     
     string name, password,newTelephone;
-    cout << "Enter your name: ";
+    cout << "ชื่อผู้ใช้: ";
     cin.ignore();
     getline(cin, name);
-    cout << "Enter your password: ";
+    cout << "รหัสผ่าน: ";
     getline(cin, password);
     // Load existing members
     vector<Member> members = loadMembers();
@@ -133,40 +132,40 @@ void edit_membership() {
     // Find the member and verify the password
     for (auto &member : members) {
         if (member.getName() == name && member.getPassword() == password) {
-            cout<<"Edit password (1) or telephone number (2): ";
+            cout<<"แก้ไขรหัสผ่าน (1) หรือ เบอร์โทรศัพท์มือถือ (2): ";
             int choice;
             cin>>choice;
             if(choice==1){
-                cout << "Enter new password: ";
+                cout << "กรอกรหัสผ่านใหม่: ";
                 cin >> password;
                 member.setPassword(password);
             }
             else if(choice==2){
-                cout << "Enter new telephone number: ";
+                cout << "กรอกเบอร์โทรศัพท์มือถือใหม่: ";
                 cin >> newTelephone;
                 member.setTelephone(newTelephone);
             }
             else{
-                cout<<"Please select (1) or (2)"<<endl;
+                cout<<"โปรดเลือก (1) หรือ (2)"<<endl;
                 cin>>choice;
             }      
             saveMembers(members);      
-            cout << "Membership updated successfully!" << endl;
+            cout << "สมาชิกมีการเปลี่ยนแปลง สำเร็จ!" << endl;
             return;
         }
     }
-    cout << "Invalid name or password!" << endl;
+    cout << "ชื่อผู้ใช้หรือรหัสผ่านผู้ใช้ผิด!" << endl;
 }
 
 int main() {
     while (true) {
         cout << "==========================" << endl;
-        cout << "Here are our memberships" << endl;
-        cout << "New Membership (1)" << endl;
-        cout << "Log in Membership (2)" << endl;
-        cout << "Edit Membership (3)" << endl;
-        cout << "Exit (4)" << endl;
-        cout << "Please choose the service you want to use: ";
+        cout << "นี่คือบริการสำหรับสมาชิกของเรา\n";
+        cout << "สมัครสมาชิกใหม่ (1)" << endl;
+        cout << "ล็อคอินเข้าสู่ระบบ (2)" << endl;
+        cout << "แก้ไขสมาชิก (3)" << endl;
+        cout << "ออก (4)" << endl;
+        cout << "โปรดเลือกบริการที่คุณต้องการ: ";
         int choice_member;
         cin >> choice_member;    
 
