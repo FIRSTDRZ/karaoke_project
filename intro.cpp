@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include <unistd.h>
 #include "Membership.cpp"
 
 using namespace std;
@@ -90,9 +91,9 @@ void user(){
         }
     }
     if (choice == 6) {
-        cout<<"Logging out...\n";
-        return;   // breakไม่ได้
-        
+        cout << "Logging out...";
+        cout << "\nGoodbye!" << endl;
+        exit(0);     // Properly end the program
     }
 } 
 
