@@ -6,7 +6,9 @@
 #include<vector>
 #include<chrono>
 #include<thread>
+#include<unistd.h>
 #include"intro.cpp"
+#include"Membership.cpp"
 using namespace std;
 
 class KaraokeAdmin {
@@ -42,7 +44,7 @@ class KaraokeAdmin {
     
         bool login() {
             string password;
-            cout << "กรุณาใส่รหัสผ่าน Admin: ";
+            cout << "Input Admin Password : ";
             cin >> password;
             isLoggedIn = (password == ADMIN_PASSWORD);
             return isLoggedIn;
@@ -50,20 +52,20 @@ class KaraokeAdmin {
         
         void adminMenu() {
             if (!login()) {
-                cout << "รหัสผ่านไม่ถูกต้อง\n";
+                cout << "Incorrect Password\n";
                 return;
             }
             
             int choice;
             do {
-                cout << "\n=== เมนู Admin ===\n";
-                cout << "1. ตั้งค่าจำนวนห้อง\n";
-                cout << "2. ตั้งค่าความจุห้อง\n";
-                cout << "3. ตั้งค่าราคาห้อง\n";
-                cout << "4. ตั้งค่าเวลาเปิด-ปิด\n";
-                cout << "5. แสดงการตั้งค่าทั้งหมด\n";
-                cout << "0. ออกจากเมนู Admin\n";
-                cout << "เลือกเมนู: ";
+                cout << "\n=== Admin Menu ===\n";
+                cout << "1. Room Count settings\n";
+                cout << "2. Room Capacity settings\n";
+                cout << "3. Room Price settings\n";
+                cout << "4. Setting open time - close time\n";
+                cout << "5. Show All settings\n";
+                cout << "0. Log Out Admin Menu\n";
+                cout << "Select Menu : ";
                 cin >> choice;
                 
                 switch(choice) {
@@ -83,144 +85,190 @@ class KaraokeAdmin {
                         displaySettings();
                         break;
                     case 0:
-                        cout << "ออกจากเมนู Admin\n";
+                        cout << "Log Out Admin Menu\n";
                         isLoggedIn = false; // logout เมื่อออกจากเมนู
                         break;
                     default:
-                        cout << "เมนูไม่ถูกต้อง กรุณาเลือกใหม่\n";
+                        cout << "Incorrect Menu!!! Please New Selected\n";
                 }
             } while (choice != 0);
         }
         
         void setRoomCounts() {
-            system("clear");
-            cout << "\n=== ตั้งค่าจำนวนห้อง ===\n";
-            cout << "จำนวนห้องเล็ก: ";
+            system("cls");
+            cout << "\n=== Room Count settings ===\n";
+            cout << "Small Room Count : ";
             cin >> settings.smallRoomCount;
-            cout << "จำนวนห้องกลาง: ";
+            cout << "Medium Room Count : ";
             cin >> settings.mediumRoomCount;
-            cout << "จำนวนห้องใหญ่: ";
+            cout << "Large Room Count : ";
             cin >> settings.largeRoomCount;
         }
         
         void setRoomCapacities() {
-            system("clear");
-            cout << "\n=== ตั้งค่าความจุห้อง (จำนวนคน) ===\n";
-            cout << "ความจุห้องเล็ก: ";
+            system("cls");
+            cout << "\n=== Room Capacity settings ( Number of People ) ===\n";
+            cout << "Small Room Capacity : ";
             cin >> settings.smallRoomCapacity;
-            cout << "ความจุห้องกลาง: ";
+            cout << "Medium Room Capacity : ";
             cin >> settings.mediumRoomCapacity;
-            cout << "ความจุห้องใหญ่: ";
+            cout << "Large Room Capacity : ";
             cin >> settings.largeRoomCapacity;
         }
         
         void setRoomPrices() {
-            system("clear");
-            cout << "\n=== ตั้งค่าราคาห้องต่อชั่วโมง ===\n";
-            cout << "ราคาห้องเล็ก: ";
+            system("cls");
+            cout << "\n=== Settings the room rate per hour ===\n";
+            cout << "Small Room Price : ";
             cin >> settings.smallRoomPrice;
-            cout << "ราคาห้องกลาง: ";
+            cout << "Medium Room Price : ";
             cin >> settings.mediumRoomPrice;
-            cout << "ราคาห้องใหญ่: ";
+            cout << "Large Room Price : ";
             cin >> settings.largeRoomPrice;
         }
         
         void setOperatingHours() {
-            system("clear");
-            cout << "\n=== ตั้งค่าเวลาเปิด-ปิด ===\n";
+            system("cls");
+            cout << "\n=== Setting open time - close time ===\n";
             do {
-                cout << "เวลาเปิด (0-23): ";
+                cout << "Open Time (0-23): ";
                 cin >> settings.openingHour;
             } while (settings.openingHour < 0 || settings.openingHour > 23);
             
             do {
-                cout << "เวลาปิด (0-23): ";
+                cout << "Close Time (0-23): ";
                 cin >> settings.closingHour;
             } while (settings.closingHour < 0 || settings.closingHour > 23 || 
                     settings.closingHour <= settings.openingHour);
         }
         
         void displaySettings() {
-            system("clear");
-            cout << "\n=== การตั้งค่าทั้งหมด ===\n";
-            cout << "จำนวนห้อง:\n";
-            cout << "  ห้องเล็ก: " << settings.smallRoomCount << " ห้อง\n";
-            cout << "  ห้องกลาง: " << settings.mediumRoomCount << " ห้อง\n";
-            cout << "  ห้องใหญ่: " << settings.largeRoomCount << " ห้อง\n";
+            system("cls");
+            cout << "\n=== ALl Settings ===\n";
+            cout << "Number of rooms :\n";
+            cout << "  Small Room : " << settings.smallRoomCount << " room\n";
+            cout << "  Mediun Room : " << settings.mediumRoomCount << " room\n";
+            cout << "  Large Room : " << settings.largeRoomCount << " room\n";
             
-            cout << "\nความจุห้อง:\n";
-            cout << "  ห้องเล็ก: " << settings.smallRoomCapacity << " คน\n";
-            cout << "  ห้องกลาง: " << settings.mediumRoomCapacity << " คน\n";
-            cout << "  ห้องใหญ่: " << settings.largeRoomCapacity << " คน\n";
+            cout << "\nRoom Capacity :\n";
+            cout << "  Small Room : " << settings.smallRoomCapacity << " people\n";
+            cout << "  Medium Room : " << settings.mediumRoomCapacity << " people\n";
+            cout << "  Large Room : " << settings.largeRoomCapacity << " people\n";
             
-            cout << "\nราคาต่อชั่วโมง:\n";
-            cout << "  ห้องเล็ก: " << settings.smallRoomPrice << " บาท\n";
-            cout << "  ห้องกลาง: " << settings.mediumRoomPrice << " บาท\n";
-            cout << "  ห้องใหญ่: " << settings.largeRoomPrice << " บาท\n";
+            cout << "\nRoom Rate per Hour :\n";
+            cout << "  Small Room : " << settings.smallRoomPrice << " Baht\n";
+            cout << "  Medium Room : " << settings.mediumRoomPrice << " Baht\n";
+            cout << "  Large Room : " << settings.largeRoomPrice << " Baht\n";
             
-            cout << "\nเวลาทำการ:\n";
-            cout << "  เปิด: " << settings.openingHour << ":00 น.\n";
-            cout << "  ปิด: " << settings.closingHour << ":00 น.\n";
+            cout << "\nOpening hours :\n";
+            cout << "  Open : " << settings.openingHour << ":00 \n";
+            cout << "  Close : " << settings.closingHour << ":00 \n";
         }
     };
 
-void adminoruser (){
-    system("clear");
+int adminoruser() {
+    system("cls");
     int loopcheck1 = 0;
-    while (loopcheck1 == 0){
-        cout<<"=========================="<<endl;
-        cout<<"Are you an Admin or a User ?? "<<endl;
-        int  user_type;
-        cout<<"Admin(1)"<<" "<<"User(2)"<<endl;
-        cout<<"Please choose the type of user you are: ";
+    int user_type = 0;
+    
+    while (loopcheck1 == 0) {
+        cout << "==========================" << endl;
+        cout << "Are you an Admin or a User ?? " << endl;
+        cout << "Admin(1)" << " " << "User(2)" << endl;
+        cout << "Please choose the type of user you are: ";
         cin >> user_type;
-        if (user_type == 1){
+        
+        if (user_type == 1) {
             admin();
-            KaraokeAdmin admin;
-            admin.startAdmin();
             loopcheck1 = 1;
-            adminoruser();
+            return 1;
         }
-        else if (user_type == 2){
+        else if (user_type == 2) {
             user();
             loopcheck1 = 1;
+            
         }
-        else{
-            system("clear");
-            cout<<"Invalid input"<<endl;
-
+        else {
+            system("cls");
+            cout << "Invalid input" << endl;
         }
     }
+    return user_type;
 }
 
+int x  = 0; 
 
 int main() {
-    system("clear");
+    system("cls");
     intro();
-    adminoruser();
+    x = adminoruser();
+    bool running = true;
+    while(running) {
 
-    int choice;
-    cin>>choice;   
-    
-   
-    if (choice == 2) {
-        cout<<"=========================="<<endl;
-        cout<<"Here are our rooms"<<endl;
-        cout<<"Small Room(1)"<<endl;
-        cout<<"Medium Room(2)"<<endl;
-        cout<<"Large Room(3)"<<endl;
-        cout<<"Please choose the room you want to book: ";
-        int choice_room;
-        cin>>choice_room;
+        if (x == 1){
+            KaraokeAdmin admin;
+            KaraokeAdmin::RoomSettings settings = admin.startAdmin();
+        }
+        else if (x==2){
+            int choice;
+            cin>>choice;   
+        
+            if (choice == 2) {
+                cout<<"=========================="<<endl;
+                cout<<"Here are our rooms"<<endl;
+                cout<<"Small Room(1)"<<endl;
+                cout<<"Medium Room(2)"<<endl;
+                cout<<"Large Room(3)"<<endl;
+                cout<<"Please choose the room you want to book: ";
+                int choice_room;
+                cin>>choice_room;
+            }
+
+            if (choice == 3) {
+                bool check = true;
+                while (check) {
+                    cout << "==========================" << endl;
+                    cout << "Here are our service\n";
+                    cout << "New Memberships (1)" << endl;
+                    cout << "Login Memberships (2)" << endl;
+                    cout << "Edit Memberships (3)" << endl;
+                    cout << "Exit (4)" << endl;
+                    cout << "Please choose the service you want to use: ";
+                    int choice_member;
+                    cin >> choice_member;    
+        
+                    switch (choice_member) {
+                        case 1:
+                            new_membership();
+                            break;
+                        case 2:
+                            login_membership();
+                            break;
+                        case 3:
+                            edit_membership();
+                            break;
+                        case 4:
+                            user(); 
+                            check = false;
+                            break;
+                        default:
+                            cout << "Invalid choice! Please try again." << endl;
+                    }
+                }
+            }
+
+            if (choice == 6) {
+                system("cls");
+                cout << "==========================" << endl;
+                cout << "\nLogging out...";
+                cout << "\nGoodbye!" << endl;
+                cout << "\n==========================" << endl;
+                running = false;
+                continue;
+            }
+        }
+
     }
 
-    if (choice == 6) {
-        system("clear");
-        cout<<"======================================"<<endl;
-        cout<<"thank you for using our service"<<endl;
-        cout <<"======================================" << endl;
-        return 0;
-    }
     return 0;
 }
-    
