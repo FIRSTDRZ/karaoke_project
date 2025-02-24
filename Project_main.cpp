@@ -166,7 +166,7 @@ class KaraokeAdmin {
         }
     };
 
-int adminoruser() {
+void adminoruser() {
     system("cls");
     int loopcheck1 = 0;
     int user_type = 0;
@@ -181,7 +181,6 @@ int adminoruser() {
         if (user_type == 1) {
             admin();
             loopcheck1 = 1;
-            return 1;
         }
         else if (user_type == 2) {
             user();
@@ -193,81 +192,70 @@ int adminoruser() {
             cout << "Invalid input" << endl;
         }
     }
-    return user_type;
 }
 
-int x  = 0; 
+ 
 
 int main() {
     system("cls");
     intro();
-    x = adminoruser();
-    bool running = true;
-    while(running) {
-
-        if (x == 1){
-            KaraokeAdmin admin;
-            KaraokeAdmin::RoomSettings settings = admin.startAdmin();
-        }
-        else if (x==2){
-            int choice;
-            cin>>choice;   
+    adminoruser();
+    KaraokeAdmin admin;
+    KaraokeAdmin::RoomSettings settings = admin.startAdmin();
+    int choice;
+    cin>>choice;   
         
-            if (choice == 2) {
-                cout<<"=========================="<<endl;
-                cout<<"Here are our rooms"<<endl;
-                cout<<"Small Room(1)"<<endl;
-                cout<<"Medium Room(2)"<<endl;
-                cout<<"Large Room(3)"<<endl;
-                cout<<"Please choose the room you want to book: ";
-                int choice_room;
-                cin>>choice_room;
-            }
+    if (choice == 2) {
+        cout<<"=========================="<<endl;
+        cout<<"Here are our rooms"<<endl;
+        cout<<"Small Room(1)"<<endl;
+        cout<<"Medium Room(2)"<<endl;
+        cout<<"Large Room(3)"<<endl;
+        cout<<"Please choose the room you want to book: ";
+        int choice_room;
+        cin>>choice_room;
+    }
 
-            if (choice == 3) {
-                bool check = true;
-                while (check) {
-                    cout << "==========================" << endl;
-                    cout << "Here are our service\n";
-                    cout << "New Memberships (1)" << endl;
-                    cout << "Login Memberships (2)" << endl;
-                    cout << "Edit Memberships (3)" << endl;
-                    cout << "Exit (4)" << endl;
-                    cout << "Please choose the service you want to use: ";
-                    int choice_member;
-                    cin >> choice_member;    
+    if (choice == 3) {
+        bool check = true;
+        while (check) {
+        cout << "==========================" << endl;
+        cout << "Here are our service\n";
+        cout << "New Memberships (1)" << endl;
+        cout << "Login Memberships (2)" << endl;
+        cout << "Edit Memberships (3)" << endl;
+        cout << "Exit (4)" << endl;
+        cout << "Please choose the service you want to use: ";
+        int choice_member;
+        cin >> choice_member;    
         
-                    switch (choice_member) {
-                        case 1:
-                            new_membership();
-                            break;
-                        case 2:
-                            login_membership();
-                            break;
-                        case 3:
-                            edit_membership();
-                            break;
-                        case 4:
-                            user(); 
-                            check = false;
-                            break;
-                        default:
-                            cout << "Invalid choice! Please try again." << endl;
-                    }
-                }
-            }
-
-            if (choice == 6) {
-                system("cls");
-                cout << "==========================" << endl;
-                cout << "\nLogging out...";
-                cout << "\nGoodbye!" << endl;
-                cout << "\n==========================" << endl;
-                running = false;
-                continue;
+        switch (choice_member) {
+            case 1:
+                new_membership();
+                break;
+            case 2:
+                login_membership();
+                break;
+            case 3:
+                edit_membership();
+                break;
+            case 4:
+                user(); 
+                check = false;
+                break;
+                default:
+                cout << "Invalid choice! Please try again." << endl;
             }
         }
+    }
 
+    if (choice == 6) {
+        system("cls");
+        cout << "==========================" << endl;
+        cout << "\nLogging out...";
+        cout << "\nGoodbye!" << endl;
+        cout << "\n==========================" << endl;
+                
     }
 
     return 0;
