@@ -285,6 +285,26 @@ int main() {
                         
                     }
                 }
+                else if (choice == 5) {
+                    bool checkingQueue = true;
+                    while (checkingQueue) {
+                        cout << "Checking Queue..." << endl;
+                        // Add the logic for checking the queue here
+                        cout << "Do you want to check the queue again?"<< endl;
+                        cout << "(Yes = 1 | No = 0): ";
+                        int checkAgain;
+                        cin >> checkAgain;
+                        if (checkAgain == 0) {
+                            checkingQueue = false;
+                        }
+                    }
+                }
+                else if (choice == 6) {
+                    userMenuRunning = false;
+                }
+                else {
+                    cout << "Invalid option! Please try again." << endl;
+                }
             }
         }
         else if (userType == 3) {
