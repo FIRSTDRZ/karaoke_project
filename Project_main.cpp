@@ -199,68 +199,71 @@ int main() {
             settings = admin.startAdmin();
         }
         else if (userType == 2) {
-            cout << "==========================" << endl;
-            cout << "      Welcome User    " << endl;
-            cout << "==========================" << endl;
-            cout << "1. View Room Information" << endl;
-            cout << "2. Book Room" << endl;
-            cout << "3. Membership Services" << endl;
-            cout << "6. Exit" << endl;
-            cout << "Please select an option: ";
-            int choice;
-            cin >> choice;   
-            
-            if (choice == 2) {
-                cout<<"=========================="<<endl;
-                cout<<"Here are our rooms"<<endl;
-                cout<<"Small Room(1)"<<endl;
-                cout<<"Medium Room(2)"<<endl;
-                cout<<"Large Room(3)"<<endl;
-                cout<<"Please choose the room you want to book: ";
-                int choice_room;
-                cin>>choice_room;
-            }
-
-            if (choice == 3) {
-                bool check = true;
-                while (check) {
+            bool userMenuRunning = true;
+            while (userMenuRunning) {
                 cout << "==========================" << endl;
-                cout << "Here are our service\n";
-                cout << "New Memberships (1)" << endl;
-                cout << "Login Memberships (2)" << endl;
-                cout << "Edit Memberships (3)" << endl;
-                cout << "Exit (4)" << endl;
-                cout << "Please choose the service you want to use: ";
-                int choice_member;
-                cin >> choice_member;    
+                cout << "      Welcome User    " << endl;
+                cout << "==========================" << endl;
+                cout << "1. View Room Information" << endl;
+                cout << "2. Book Room" << endl;
+                cout << "3. Membership Services" << endl;
+                cout << "6. Exit" << endl;
+                cout << "Please select an option: ";
+                int choice;
+                cin >> choice;   
                 
-                switch (choice_member) {
-                    case 1:
-                        new_membership();
-                        break;
-                    case 2:
-                        login_membership();
-                        break;
-                    case 3:
-                        edit_membership();
-                        break;
-                    case 4:
-                        user(); 
-                        check = false;
-                        break;
-                        default:
-                        cout << "Invalid choice! Please try again." << endl;
+                if (choice == 2) {
+                    cout<<"=========================="<<endl;
+                    cout<<"Here are our rooms"<<endl;
+                    cout<<"Small Room(1)"<<endl;
+                    cout<<"Medium Room(2)"<<endl;
+                    cout<<"Large Room(3)"<<endl;
+                    cout<<"Please choose the room you want to book: ";
+                    int choice_room;
+                    cin>>choice_room;
+                }
+                else if (choice == 3) {
+                    bool check = true;
+                    while (check) {
+                        cout << "==========================" << endl;
+                        cout << "Here are our service\n";
+                        cout << "New Memberships (1)" << endl;
+                        cout << "Login Memberships (2)" << endl;
+                        cout << "Edit Memberships (3)" << endl;
+                        cout << "Exit (4)" << endl;
+                        cout << "Please choose the service you want to use: ";
+                        int choice_member;
+                        cin >> choice_member;    
+                        
+                        if (choice_member == 1) {
+                            new_membership();
+                        }
+                        else if (choice_member == 2) {
+                            login_membership();
+                        }
+                        else if (choice_member == 3) {
+                            edit_membership();
+                        }
+                        else if (choice_member == 4) {
+                            user();
+                            check = false;
+                        }
+                        else {
+                            cout << "Invalid choice! Please try again." << endl;
+                        }
                     }
                 }
-            }
-
-            if (choice == 6) {
-                system("cls");
-                cout << "==========================" << endl;
-                cout << "\nLogging out...";
-                cout << "\nGoodbye!" << endl;
-                cout << "\n==========================" << endl;
-                running = false;
+                else if (choice == 6) {
+                    system("cls");
+                    cout << "==========================" << endl;
+                    cout << "\nLogging out...";
+                    cout << "\nGoodbye!" << endl;
+                    cout << "\n==========================" << endl;
+                    userMenuRunning = false;
+                }
+                else {
+                    cout << "Invalid option! Please try again." << endl;
+                }
             }
         }
     }
