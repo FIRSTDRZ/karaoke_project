@@ -9,6 +9,7 @@
 #include<unistd.h>
 #include"intro.cpp"
 #include"Membership.cpp"
+#include"booking.cpp"   
 using namespace std;
 
 class KaraokeAdmin {
@@ -259,10 +260,32 @@ int main() {
                 else if (choice == 6) {
                     userMenuRunning = false;
                 }
-                else {
-                    cout << "Invalid option! Please try again." << endl;
+                else if (choice == 3){
+                    bool bookingMenu = true;
+                    while (bookingMenu) {
+                        system("cls");
+                        cout << "==========================" << endl;
+                        cout << "Here are our booking" << endl;
+                        cout << "Booking (1)" << endl;
+                        cout << "Exit (2)"<< endl;
+                        int choice_book;
+                        cout << "Please choose the service you want to use: ";
+                        cin >> choice_book;
+                        
+                        if (choice_book == 1){
+                            system("cls");
+                            bookRoom();
+                        }
+                        else if (choice_book == 2){
+                            bookingMenu = false;
+                        }
+                        else {
+                            cout << "Invalid option! Please try again." << endl;
+                        }
+                        
+                    }
                 }
-            } 
+            }
         }
         else if (userType == 3) {
             system("cls");
