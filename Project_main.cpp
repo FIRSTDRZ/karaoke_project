@@ -173,11 +173,11 @@ int adminoruser() {
     while (true) {
         cout << "==========================" << endl;
         cout << "Are you an Admin or a User ?? " << endl;
-        cout << "Admin(1)" << " " << "User(2)" << endl;
+        cout << "Admin(1)" << " " << "User(2)" <<" "<<"Log out (3)"<< endl;
         cout << "Please choose the type of user you are: ";
         cin >> user_type;
         
-        if (user_type == 1 || user_type == 2) {
+        if (user_type == 1 || user_type == 2 || user_type == 3) {
             return user_type;
         }
         system("cls");
@@ -257,17 +257,17 @@ int main() {
                     }
                 }
                 else if (choice == 6) {
-                    system("cls");
-                    cout << "==========================" << endl;
-                    cout << "\nLogging out...";
-                    cout << "\nGoodbye!" << endl;
-                    cout << "\n==========================" << endl;
                     userMenuRunning = false;
                 }
                 else {
                     cout << "Invalid option! Please try again." << endl;
                 }
-            }
+            } 
+        }
+        else if (userType == 3) {
+            system("cls");
+            cout<<"Thank you for using the Room Booking System. Goodbye!"<<endl;
+            running = false;
         }
     }
     return 0;
