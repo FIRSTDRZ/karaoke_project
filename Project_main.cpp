@@ -201,12 +201,15 @@ int main() {
         else if (userType == 2) {
             bool userMenuRunning = true;
             while (userMenuRunning) {
+                system("cls");
                 cout << "==========================" << endl;
                 cout << "      Welcome User    " << endl;
                 cout << "==========================" << endl;
-                cout << "1. View Room Information" << endl;
-                cout << "2. Book Room" << endl;
-                cout << "3. Membership Services" << endl;
+                cout << "1. Membership Services" << endl;
+                cout << "2. View Room Information" << endl;
+                cout << "3. Book Room" << endl;
+                cout << "4. Cancel Booking" << endl;
+                cout << "5. Checking Queue" << endl;
                 cout << "6. Exit" << endl;
                 cout << "Please select an option: ";
                 int choice;
@@ -222,7 +225,7 @@ int main() {
                     int choice_room;
                     cin>>choice_room;
                 }
-                else if (choice == 3) {
+                else if (choice == 1) {
                     bool check = true;
                     while (check) {
                         cout << "==========================" << endl;
