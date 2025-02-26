@@ -191,6 +191,9 @@ int main() {
     intro();
     KaraokeAdmin admin;
     KaraokeAdmin::RoomSettings settings;
+    int defult_small = settings.smallRoomCount;
+    int defult_medium = settings.mediumRoomCount;
+    int defult_large = settings.largeRoomCount;
     
     bool running = true;
     while(running) {
@@ -217,14 +220,55 @@ int main() {
                 cin >> choice;   
                 
                 if (choice == 2) {
-                    cout<<"=========================="<<endl;
-                    cout<<"Here are our rooms"<<endl;
-                    cout<<"Small Room(1)"<<endl;
-                    cout<<"Medium Room(2)"<<endl;
-                    cout<<"Large Room(3)"<<endl;
-                    cout<<"Please choose the room you want to book: ";
-                    int choice_room;
-                    cin>>choice_room;
+                    system("cls");
+                    bool viewRoomInfo = true;
+                    while (viewRoomInfo) {
+                        system("cls");
+                        cout << "==========================" << endl;
+                        cout << "Here are our rooms" << endl;
+                        cout << "Small Room(1)" << endl;
+                        cout << "Medium Room(2)" << endl;
+                        cout << "Large Room(3)" << endl;
+                        cout << "Please choose the room you want to book: ";
+                        int choice_room;
+                        cin >> choice_room;
+                        switch (choice_room) {
+                            case 1:
+                                system("cls");
+                                cout << "The small room has a total of : " << defult_small << " rooms" << "      ||      ";
+                                cout << "There are a total of : " << settings.smallRoomCount << " vacant rooms" << endl;
+                                cout << "\n";
+                                break;
+                            case 2:
+                                system("cls");
+                                cout << "The medium room has a total of : " << defult_medium << " rooms" << "      ||      ";
+                                cout << "There are a total of : " << settings.mediumRoomCount << " vacant rooms" << endl;
+                                cout << "\n";
+                                break;
+                            case 3:
+                                system("cls");
+                                cout << "The large room has a total of : " << settings.largeRoomCount << " rooms" << "      ||      ";
+                                cout << "There are a total of : " << settings.largeRoomCount << " vacant rooms" << endl;
+                                cout << "\n";
+                                break;
+                            default:
+                                cout << "Invalid choice! Please try again." << endl;
+                                break;
+                        }
+                        cout << "Do you want to view another room?";
+                        cout << "\n(1) Yes";
+                        cout << "\n(2) No";
+                        cout << "\nPlease select an option: ";
+                        int continueChoice;
+                        cin >> continueChoice;
+                        if (continueChoice == 2) {
+                            viewRoomInfo = false;
+                        }
+                        else{
+                            cout << "Invalid Input!!!\n" ;
+                        }
+
+                    }
                 }
                 else if (choice == 1) {
                     bool check = true;
