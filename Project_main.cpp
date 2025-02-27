@@ -280,9 +280,8 @@ bool checkMembership(const string& name) {
     return false; 
 }
 
-void Booking_System() {
+void Booking_System(KaraokeAdmin::RoomSettings& settings) {  // รับ settings เป็น reference
     srand(time(0));
-    KaraokeAdmin::RoomSettings settings; // ใช้ settings จาก KaraokeAdmin
     BookingManager bm(settings);
     string name, roomType;
     int hours, people;
@@ -299,9 +298,9 @@ void Booking_System() {
     }
     
     cout << "Suggest room types: ";
-    if (people <= settings.smallRoomCapacity) cout << "S" <<"( available " << settings.smallRoomCount <<" )"; 
-    if (people <= settings.mediumRoomCapacity) cout << "M "<<"( available " << settings.mediumRoomCount <<" )";
-    if (people <= settings.largeRoomCapacity) cout << "L "<<"( available " << settings.mediumRoomCount <<" )";
+    if (people <= settings.smallRoomCapacity) cout << " S " <<"( available " << settings.smallRoomCount <<" )"; 
+    if (people <= settings.mediumRoomCapacity) cout << " M "<<"( available " << settings.mediumRoomCount <<" )";
+    if (people <= settings.largeRoomCapacity) cout << " L "<<"( available " << settings.largeRoomCount <<" )";
     cout << endl;
     
     do {
@@ -337,22 +336,36 @@ void Booking_System() {
     cout << "Confirm booking? (Y/N): ";
     cin >> confirm;
     if (confirm == 'Y' || confirm == 'y') {
-        bm.bookRoom(name, roomType, hours, isMember);
-        if(roomType == "S"){
+        bool canBook = false;
+        // เช็คเฉพาะประเภทห้องที่ต้องการจอง
+        if (roomType == "S" && settings.smallRoomCount > 0) {
+            canBook = true;
             settings.smallRoomCount--;
-        }
-        else if(roomType == "M"){
+        } else if (roomType == "M" && settings.mediumRoomCount > 0) {
+            canBook = true;
             settings.mediumRoomCount--;
-        }
-        else if(roomType == "L"){
+        } else if (roomType == "L" && settings.largeRoomCount > 0) {
+            canBook = true;
             settings.largeRoomCount--;
+        }
+
+        if (canBook) {
+            bm.bookRoom(name, roomType, hours, isMember);
+        } else {
+            cout << "This Room type is fulled , Do you still want to book?" << endl;
+            cout<<"Confirm booking? (Y/N) ";
+            string choice_book;
+            cin >> choice_book;
+            if (choice_book == "Y" || choice_book == "y") {
+                cout<<"You will on the queue";
+                
+            }
         }
     } else {
         cout << "Booking canceled." << endl;
     }
-
-    
 }
+
 int adminoruser() {
     system("cls");
     int user_type = 0;
@@ -526,7 +539,7 @@ int main() {
                         
                         if (choice_book == 1){
                             system("cls");
-                            Booking_System();
+                            Booking_System(settings);
                         }
                         else if (choice_book == 2){
                             bookingMenu = false;
