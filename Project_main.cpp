@@ -9,30 +9,31 @@
 #include<unistd.h>
 #include"intro.cpp"
 #include"Membership.cpp"
-#include"booking.cpp"   
+#include"booking.cpp"
+#include"data.cpp"
+
 using namespace std;
 
 class KaraokeAdmin {
     public:
-        // โครงสร้างข้อมูลสำหรับห้อง (public เพื่อให้คลาสอื่นเข้าถึงโครงสร้างได้)
         struct RoomSettings {
-            int smallRoomCount = 0;
-            int mediumRoomCount = 0;
-            int largeRoomCount = 0;
-            int smallRoomCapacity = 0;
-            int mediumRoomCapacity = 0;
-            int largeRoomCapacity = 0;
-            double smallRoomPrice = 0;
-            double mediumRoomPrice = 0;
-            double largeRoomPrice = 0;
-            int openingHour = 0;
-            int closingHour = 0;
+            int smallRoomCount = 3;
+            int mediumRoomCount = 2;
+            int largeRoomCount = 1;
+            int smallRoomCapacity = 3;
+            int mediumRoomCapacity = 5;
+            int largeRoomCapacity = 8;
+            double smallRoomPrice = 70;
+            double mediumRoomPrice = 90;
+            double largeRoomPrice = 120;
+            int openingHour = 11;
+            int closingHour = 20;
         };
     
     private:
-        const string ADMIN_PASSWORD = "admin123"; // รหัสผ่านที่กำหนดไว้ล่วงหน้า
+        const string ADMIN_PASSWORD = "admin123";
         static RoomSettings defaultSettings; // ตั้งค่าเริ่มต้นของห้อง
-        RoomSettings settings; // เก็บการตั้งค่าเป็น private
+        RoomSettings settings;
         bool isLoggedIn = false;
     
     public:
@@ -41,8 +42,7 @@ class KaraokeAdmin {
             adminMenu();
             return settings;
         }
-    
-    
+
         bool login() {
             string password;
             cout << "Input Admin Password : ";
@@ -56,7 +56,6 @@ class KaraokeAdmin {
                 cout << "Incorrect Password\n";
                 return;
             }
-            
             int choice;
             do {
                 cout << "\n=== Admin Menu ===\n";
@@ -68,7 +67,6 @@ class KaraokeAdmin {
                 cout << "0. Log Out Admin Menu\n";
                 cout << "Select Menu : ";
                 cin >> choice;
-                
                 switch(choice) {
                     case 1:
                         setRoomCounts();
@@ -87,7 +85,7 @@ class KaraokeAdmin {
                         break;
                     case 0:
                         cout << "Log Out Admin Menu\n";
-                        isLoggedIn = false; // logout เมื่อออกจากเมนู
+                        isLoggedIn = false;
                         break;
                     default:
                         cout << "Incorrect Menu!!! Please New Selected\n";
@@ -224,50 +222,70 @@ int main() {
                     bool viewRoomInfo = true;
                     while (viewRoomInfo) {
                         system("cls");
-                        cout << "==========================" << endl;
-                        cout << "Here are our rooms" << endl;
-                        cout << "Small Room(1)" << endl;
-                        cout << "Medium Room(2)" << endl;
-                        cout << "Large Room(3)" << endl;
-                        cout << "Please choose the room you want to book: ";
+                        viewRoom();
                         int choice_room;
-                        cin >> choice_room;
+                        bool validInput = false;
+                        do {
+                            cout << "┌────────────────────────┐" << endl;
+                            cout << "│ Enter your choice (1-3)│: ";
+                            cin >> choice_room;
+                            if (cin.fail()) {
+                                cin.clear();
+                                cin.ignore(10000, '\n');
+                                cout << "│ Invalid input. Please enter a number between 1-3 │" << endl;
+                            } else if (choice_room >= 1 && choice_room <= 3) {
+                                validInput = true;
+                            } else {
+                                cout << "│ Please enter a number between 1-3 │" << endl;
+                            }
+                            cout << "└────────────────────────┘" << endl;
+                        } while (!validInput);
+
                         switch (choice_room) {
                             case 1:
                                 system("cls");
-                                cout << "The small room has a total of : " << defult_small << " rooms" << "      ||      ";
-                                cout << "There are a total of : " << settings.smallRoomCount << " vacant rooms" << endl;
-                                cout << "\n";
+                                cout << "╔══════════════════════════════════════════════════╗" << endl;
+                                cout << "║ Small Room Information                           ║" << endl;
+                                cout << "║ Total Rooms: " << defult_small << "                                   ║" << endl;
+                                cout << "║ Vacant Rooms: " << settings.smallRoomCount << "                                  ║" << endl;
+                                cout << "╚══════════════════════════════════════════════════╝" << endl;
                                 break;
                             case 2:
                                 system("cls");
-                                cout << "The medium room has a total of : " << defult_medium << " rooms" << "      ||      ";
-                                cout << "There are a total of : " << settings.mediumRoomCount << " vacant rooms" << endl;
-                                cout << "\n";
+                                cout << "╔══════════════════════════════════════════════════╗" << endl;
+                                cout << "║ Medium Room Information                          ║" << endl;
+                                cout << "║ Total Rooms: " << defult_medium << "                                   ║" << endl;
+                                cout << "║ Vacant Rooms: " << settings.mediumRoomCount << "                                  ║" << endl;
+                                cout << "╚══════════════════════════════════════════════════╝" << endl;
                                 break;
                             case 3:
                                 system("cls");
-                                cout << "The large room has a total of : " << settings.largeRoomCount << " rooms" << "      ||      ";
-                                cout << "There are a total of : " << settings.largeRoomCount << " vacant rooms" << endl;
-                                cout << "\n";
-                                break;
-                            default:
-                                cout << "Invalid choice! Please try again." << endl;
+                                cout << "╔══════════════════════════════════════════════════╗" << endl;
+                                cout << "║ Large Room Information                           ║" << endl;
+                                cout << "║ Total Rooms: " << defult_large << "                                   ║" << endl;
+                                cout << "║ Vacant Rooms: " << settings.largeRoomCount << "                                  ║" << endl;
+                                cout << "╚══════════════════════════════════════════════════╝" << endl;
                                 break;
                         }
-                        cout << "Do you want to view another room?";
-                        cout << "\n(1) Yes";
-                        cout << "\n(2) No";
-                        cout << "\nPlease select an option: ";
+                        continueviewRoom();
                         int continueChoice;
-                        cin >> continueChoice;
-                        if (continueChoice == 2) {
-                            viewRoomInfo = false;
-                        }
-                        else{
-                            cout << "Invalid Input!!!\n" ;
-                        }
-
+                        bool validContinueChoice = false;
+                        do {
+                            cout << "Enter your choice (1-2): ";
+                            cin >> continueChoice;
+                            if (cin.fail()) {
+                                cin.clear();
+                                cin.ignore(10000, '\n');
+                                cout << "Invalid input. Please enter 1 or 2." << endl;
+                            } else if (continueChoice == 1 || continueChoice == 2) {
+                                validContinueChoice = true;
+                                if (continueChoice == 2) {
+                                    viewRoomInfo = false;
+                                }
+                            } else {
+                                cout << "Please enter either 1 or 2." << endl;
+                            }
+                        } while (!validContinueChoice);
                     }
                 }
                 else if (choice == 1) {
