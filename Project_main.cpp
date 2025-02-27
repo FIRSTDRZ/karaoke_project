@@ -226,45 +226,38 @@ int main() {
                         int choice_room;
                         bool validInput = false;
                         do {
-                            cout << "┌────────────────────────┐" << endl;
-                            cout << "│ Enter your choice (1-3)│: ";
+                            cout << "Enter your choice (1-3) : ";
                             cin >> choice_room;
                             if (cin.fail()) {
                                 cin.clear();
                                 cin.ignore(10000, '\n');
-                                cout << "│ Invalid input. Please enter a number between 1-3 │" << endl;
+                                cout << "Invalid input. Please enter a number between 1-3" << endl;
                             } else if (choice_room >= 1 && choice_room <= 3) {
                                 validInput = true;
                             } else {
-                                cout << "│ Please enter a number between 1-3 │" << endl;
+                                cout << "Please enter a number between 1-3" << endl;
                             }
-                            cout << "└────────────────────────┘" << endl;
+                            
                         } while (!validInput);
 
                         switch (choice_room) {
                             case 1:
                                 system("cls");
-                                cout << "╔══════════════════════════════════════════════════╗" << endl;
-                                cout << "║ Small Room Information                           ║" << endl;
-                                cout << "║ Total Rooms: " << defult_small << "                                   ║" << endl;
-                                cout << "║ Vacant Rooms: " << settings.smallRoomCount << "                                  ║" << endl;
-                                cout << "╚══════════════════════════════════════════════════╝" << endl;
+                                cout << "Small Room Information"<< endl;
+                                cout << "Total Rooms: " << defult_small<< endl;
+                                cout << "Vacant Rooms: " << settings.smallRoomCount<< endl;
                                 break;
                             case 2:
                                 system("cls");
-                                cout << "╔══════════════════════════════════════════════════╗" << endl;
-                                cout << "║ Medium Room Information                          ║" << endl;
-                                cout << "║ Total Rooms: " << defult_medium << "                                   ║" << endl;
-                                cout << "║ Vacant Rooms: " << settings.mediumRoomCount << "                                  ║" << endl;
-                                cout << "╚══════════════════════════════════════════════════╝" << endl;
+                                cout << "Medium Room Information" << endl;
+                                cout << "Total Rooms: " << defult_medium<< endl;
+                                cout << "Vacant Rooms: " << settings.mediumRoomCount<< endl;
                                 break;
                             case 3:
                                 system("cls");
-                                cout << "╔══════════════════════════════════════════════════╗" << endl;
-                                cout << "║ Large Room Information                           ║" << endl;
-                                cout << "║ Total Rooms: " << defult_large << "                                   ║" << endl;
-                                cout << "║ Vacant Rooms: " << settings.largeRoomCount << "                                  ║" << endl;
-                                cout << "╚══════════════════════════════════════════════════╝" << endl;
+                                cout << "Large Room Information"<< endl;
+                                cout << "Total Rooms: " << defult_large<< endl;
+                                cout << "Vacant Rooms: " << settings.largeRoomCount << endl;
                                 break;
                         }
                         continueviewRoom();
