@@ -6,7 +6,7 @@
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
-#include <cmath>  // สำหรับฟังก์ชัน floor()
+#include <cmath>
 using namespace std;
 
 const int SMALL_ROOM_COST = 80;
