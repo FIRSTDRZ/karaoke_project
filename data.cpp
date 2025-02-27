@@ -7,6 +7,7 @@ using namespace std;
 void viewRoom(){
     cout << "==========================" << endl;
     cout << "Here are our rooms" << endl;
+    cout << "==========================" << endl;
     cout << "Small Room(1)" << endl;
     cout << "Medium Room(2)" << endl;
     cout << "Large Room(3)" << endl;
@@ -14,6 +15,7 @@ void viewRoom(){
 void continueviewRoom(){
     cout<<"=========================="<<endl;
     cout << "Continue viewing rooms?    " << endl;
+    cout << "==========================" << endl;
     cout << "1. Yes                     " << endl;
     cout << "2. No                      " << endl;
                         

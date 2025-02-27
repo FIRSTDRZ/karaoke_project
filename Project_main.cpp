@@ -435,7 +435,7 @@ int main() {
                         int choice_room;
                         bool validInput = false;
                         do {
-                            cout << "Enter your choice (1-3) : ";
+                            cout << "\nEnter your choice (1-3) : ";
                             cin >> choice_room;
                             if (cin.fail()) {
                                 cin.clear();
@@ -459,25 +459,34 @@ int main() {
                                 cout << "Small Room Information"<< endl;
                                 cout << "Total Rooms: " << defult_small<< endl;
                                 cout << "Vacant Rooms: " << settings.smallRoomCount<< endl;
+                                cout << "==========================" << endl;
+                                cout << "Price: " << settings.smallRoomPrice << " Baht per hour" << endl;
+                                cout << "Capacity: " << settings.smallRoomCapacity << " people" << endl;
                                 break;
                             case 2:
                                 system("cls");
                                 cout << "Medium Room Information" << endl;
                                 cout << "Total Rooms: " << defult_medium<< endl;
                                 cout << "Vacant Rooms: " << settings.mediumRoomCount<< endl;
+                                cout << "==========================" << endl;
+                                cout << "Price: " << settings.mediumRoomPrice << " Baht per hour" << endl;
+                                cout << "Capacity: " << settings.mediumRoomCapacity << " people" << endl;
                                 break;
                             case 3:
                                 system("cls");
                                 cout << "Large Room Information"<< endl;
                                 cout << "Total Rooms: " << defult_large<< endl;
                                 cout << "Vacant Rooms: " << settings.largeRoomCount << endl;
+                                cout << "==========================" << endl;
+                                cout << "Price: " << settings.largeRoomPrice << " Baht per hour" << endl;
+                                cout << "Capacity: " << settings.largeRoomCapacity << " people" << endl;
                                 break;
                         }
                         continueviewRoom();
                         int continueChoice;
                         bool validContinueChoice = false;
                         do {
-                            cout << "Enter your choice (1-2): ";
+                            cout << "\nEnter your choice (1-2): ";
                             cin >> continueChoice;
                             if (cin.fail()) {
                                 cin.clear();
