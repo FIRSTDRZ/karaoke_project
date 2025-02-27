@@ -567,18 +567,90 @@ int main() {
                     }
                 }
                 else if (choice == 5) {
+                    system("cls");
                     bool checkingQueue = true;
                     while (checkingQueue) {
-                        cout << "Checking Queue..." << endl;
-                        // Add the logic for checking the queue here
+                        system("cls");
+                        viewQueue();
+                        int choice_room;
+                        bool validInput = false;
+                        do {
+                            cout << "Enter your choice (1-3) : ";
+                            cin >> choice_room;
+                            if (cin.fail()) {
+                                cin.clear();
+                                cin.ignore(10000, '\n');
+                                cout << "Invalid input. Please enter a number between 1-3" << endl;
+                            } else if (choice_room >= 1 && choice_room <= 3) {
+                                validInput = true;
+                            } else {
+                                system("cls");
+                                cout << "Please enter a number between 1-3" << endl;
+                                sleep(2);
+                                system("cls");
+                                viewQueue();
+                            }
+                            ifstream file("booking.txt");
+                            string line;
+                            switch (choice_room) {
+                            case 1:
+                                system("cls");
+                                if (!file) {
+                                    cerr << "Unable to open file!" << endl;
+                                    return 1; // Exit the program if the file cannot be opened
+                                }
+                                while (getline(file, line)) {
+                                    // Find the first non-space or non-tab character
+                                    size_t first_char = line.find_first_not_of(" \t");
+                                    // Check if the line starts with 'S' or 's'
+                                    if (first_char != string::npos && (line[first_char] == 'S' || line[first_char] == 's')) {
+                                        cout << line << endl; // Display the line that starts with 'S' or 's'
+                                    }
+                                }
+                                file.close(); 
+                                break;
+                            case 2:
+                                system("cls");
+                                if (!file) {
+                                    cerr << "Unable to open file!" << endl;
+                                    return 1; // Exit the program if the file cannot be opened
+                                }
+                                while (getline(file, line)) {
+                                    size_t first_char = line.find_first_not_of(" \t");
+                                    if (first_char != string::npos && (line[first_char] == 'M' || line[first_char] == 'm')) {
+                                        cout << line << endl; 
+                                    }
+                                }
+                                file.close(); 
+                                break;
+
+                            case 3:
+                                system("cls");
+                                if (!file) {
+                                    cerr << "Unable to open file!" << endl;
+                                    return 1; // Exit the program if the file cannot be opened
+                                }
+                                while (getline(file, line)) {
+                                    size_t first_char = line.find_first_not_of(" \t");
+                                    if (first_char != string::npos && (line[first_char] == 'L' || line[first_char] == 'l')) {
+                                        cout << line << endl; 
+                                    }
+                                }
+                                file.close(); 
+                                break;
+                }
+                        //Add the logic for checking the queue here
+                        cout << "=====================================" << endl;
                         cout << "Do you want to check the queue again?"<< endl;
                         cout << "(Yes = 1 | No = 0): ";
                         int checkAgain;
                         cin >> checkAgain;
                         if (checkAgain == 0) {
+                            //break;
                             checkingQueue = false;
                         }
-                    }
+                    } while (!validInput);
+            }
                 }
                 else if (choice == 6) {
                     userMenuRunning = false;
