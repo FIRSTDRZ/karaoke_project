@@ -253,9 +253,9 @@ private:
                           << setw(2) << setfill('0') << checkoutTimeInfo->tm_min << ":"
                           << setw(2) << setfill('0') << checkoutTimeInfo->tm_sec;
 
-        file << name << "," << roomType << "," << hours << "," 
+        file << code << "," << roomType << "," << hours << "," 
              << checkinFormatted.str() << "," << checkoutFormatted.str() << "," 
-             << code << endl;
+             << name << endl;
         file.close();
     }
     
@@ -291,12 +291,12 @@ void Booking_System(KaraokeAdmin::RoomSettings& settings) {  // รับ settin
     cin >> name;
     cout << "Enter number of people: ";
     cin >> people;
-    while (people > 15 || people == 0) {   // ต้องรอเชื่อมกับ admin
+    while (people > settings.largeRoomCapacity || people == 0) {
         cout << "Too much people or No people (can contain )" << endl;
         cout << "Enter number of people: ";
         cin >> people;
     }
-    
+
     cout << "Suggest room types: ";
     if (people <= settings.smallRoomCapacity) cout << " S " <<"( available " << settings.smallRoomCount <<" )"; 
     if (people <= settings.mediumRoomCapacity) cout << " M "<<"( available " << settings.mediumRoomCount <<" )";
@@ -352,14 +352,7 @@ void Booking_System(KaraokeAdmin::RoomSettings& settings) {  // รับ settin
         if (canBook) {
             bm.bookRoom(name, roomType, hours, isMember);
         } else {
-            cout << "This Room type is fulled , Do you still want to book?" << endl;
-            cout<<"Confirm booking? (Y/N) ";
-            string choice_book;
-            cin >> choice_book;
-            if (choice_book == "Y" || choice_book == "y") {
-                cout<<"You will on the queue";
-                
-            }
+            cout << "This Room type is fulled , Wait for someone cancel" << endl;
         }
     } else {
         cout << "Booking canceled." << endl;
