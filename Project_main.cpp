@@ -378,8 +378,22 @@ int adminoruser() {
     }
 }
 
+int clear_booking() {
+    ofstream file("booking.txt", ios::trunc); // เปิดไฟล์และลบข้อมูล
+    if (file.is_open()) {
+        system("cls");
+        cout << "Preparing data....\n";
+        sleep(1);
+        file.close();
+    } else {
+        cerr << "Error\n";
+    }
+    return 0;
+}
 
 int main() {
+
+    clear_booking();
     system("cls");
     intro();
     KaraokeAdmin admin;
