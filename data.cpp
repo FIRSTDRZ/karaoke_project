@@ -12,10 +12,9 @@ void viewRoom(){
     cout << "Large Room(3)" << endl;
 }
 void continueviewRoom(){
-    cout << "\n╔════════════════════════════╗" << endl;
-    cout << "║ Continue viewing rooms?    ║" << endl;
-    cout << "║ 1. Yes                     ║" << endl;
-    cout << "║ 2. No                      ║" << endl;
-    cout << "╚════════════════════════════╝" << endl;
+    cout<<"=========================="<<endl;
+    cout << "Continue viewing rooms?    " << endl;
+    cout << "1. Yes                     " << endl;
+    cout << "2. No                      " << endl;
                         
 }
