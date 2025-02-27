@@ -9,8 +9,11 @@
 #include<unistd.h>
 #include"intro.cpp"
 #include"Membership.cpp"
-#include"booking.cpp"
 #include"data.cpp"
+#include <sstream>
+#include <iomanip>
+#include <algorithm>
+#include<cmath>
 
 using namespace std;
 
@@ -164,6 +167,197 @@ class KaraokeAdmin {
             cout << "  Close : " << settings.closingHour << ":00 \n";
         }
     };
+class BookingManager {
+private:
+    KaraokeAdmin::RoomSettings settings;
+
+public:
+    // เพิ่ม constructor ที่รับค่า settings
+    BookingManager(const KaraokeAdmin::RoomSettings& adminSettings) : settings(adminSettings) {}
+
+    struct Booking {
+        string name;
+        string roomType;
+        int hours;
+        time_t bookingTime;
+        string bookingCode;
+    };
+
+    void bookRoom(string name, string roomType, int hours, bool isMember) {
+        time_t now = time(0);
+        tm *localTime = localtime(&now);
+        //localTime->tm_hour -= 2;
+        now = mktime(localTime);
+        time_t checkoutTime = now + (hours * 3600);
+
+        string code = generateBookingCode(roomType);
+        int price = calculatePrice(roomType, hours, isMember);
+
+        saveBooking(name, roomType, hours, checkoutTime, code);
+        cout << "Booking successful!\nBooking Code: " << code << endl;
+        cout << "Checkout Time: " << ctime(&checkoutTime);
+        cout << "Total Price: " << price << " Baht" << endl;
+    }
+
+private:
+    string generateBookingCode(string roomType) {
+        ifstream file("booking.txt");
+        string line;
+        int count = 0;
+        while (getline(file, line)) {
+            vector<string> data;
+            stringstream ss(line);
+            string token;
+            while (getline(ss, token, ',')) {
+                data.push_back(token);
+            }
+            if (!data.empty() && data[1] == roomType) {
+                count++;
+            }
+        }
+        file.close();
+
+        stringstream ss;
+        ss << roomType << setw(3) << setfill('0') << (count + 1);
+        return ss.str();
+    }
+
+    int calculatePrice(string roomType, int hours, bool isMember) {
+        int cost;
+        if (roomType == "S") {
+            cost = settings.smallRoomPrice;
+        } else if (roomType == "M") {
+            cost = settings.mediumRoomPrice;
+        } else {
+            cost = settings.largeRoomPrice;
+        }
+        int total = cost * hours;
+        return isMember ? total * 0.9 : total;
+    }
+
+    void saveBooking(string name, string roomType, int hours, time_t checkoutTime, string code) {
+        ofstream file("booking.txt", ios::app);
+        
+        // Get current time for check-in
+        time_t now = time(0);
+        tm *checkinTime = localtime(&now);
+        stringstream checkinFormatted;
+        checkinFormatted << setw(2) << setfill('0') << checkinTime->tm_hour << ":"
+                         << setw(2) << setfill('0') << checkinTime->tm_min << ":"
+                         << setw(2) << setfill('0') << checkinTime->tm_sec;
+
+        // Format checkout time
+        tm *checkoutTimeInfo = localtime(&checkoutTime);
+        stringstream checkoutFormatted;
+        checkoutFormatted << setw(2) << setfill('0') << checkoutTimeInfo->tm_hour << ":"
+                          << setw(2) << setfill('0') << checkoutTimeInfo->tm_min << ":"
+                          << setw(2) << setfill('0') << checkoutTimeInfo->tm_sec;
+
+        file << code << "," << roomType << "," << hours << "," 
+             << checkinFormatted.str() << "," << checkoutFormatted.str() << "," 
+             << name << endl;
+        file.close();
+    }
+    
+};
+
+bool checkMembership(const string& name) {
+    ifstream file("Member.txt");
+    string line;
+    
+    while (getline(file, line)) {
+        vector<string> data;
+        stringstream ss(line);
+        string token;
+        while (getline(ss, token, ',')) {
+            data.push_back(token);
+        }
+        if (!data.empty() && data[0] == name) {
+            return true; 
+        }
+    }
+    
+    return false; 
+}
+
+void Booking_System(KaraokeAdmin::RoomSettings& settings) {  // รับ settings เป็น reference
+    srand(time(0));
+    BookingManager bm(settings);
+    string name, roomType;
+    int hours, people;
+    char confirm;
+    
+    cout << "Enter your name: ";
+    cin >> name;
+    cout << "Enter number of people: ";
+    cin >> people;
+    while (people > settings.largeRoomCapacity || people == 0) {
+        cout << "Too much people or No people (can contain )" << endl;
+        cout << "Enter number of people: ";
+        cin >> people;
+    }
+
+    cout << "Suggest room types: ";
+    if (people <= settings.smallRoomCapacity) cout << " S " <<"( available " << settings.smallRoomCount <<" )"; 
+    if (people <= settings.mediumRoomCapacity) cout << " M "<<"( available " << settings.mediumRoomCount <<" )";
+    if (people <= settings.largeRoomCapacity) cout << " L "<<"( available " << settings.largeRoomCount <<" )";
+    cout << endl;
+    
+    do {
+        cout << "Select room type (S/M/L): ";
+        cin >> roomType;
+        transform(roomType.begin(), roomType.end(), roomType.begin(), ::toupper);
+        if ((roomType == "S" && people > settings.smallRoomCapacity) ||
+            (roomType == "M" && people > settings.mediumRoomCapacity) ||
+            (roomType == "L" && people > settings.largeRoomCapacity)) {
+            cout << "Invalid choice! Room too small for the group. Try again." << endl;
+        } else {
+            break;
+        }
+    } while (true);
+    
+    cout << "Enter hours (limit 3 hours): ";
+    double temp_hours;  // ใช้ double เพื่อตรวจจับเลขทศนิยม
+    while (!(cin >> temp_hours) || temp_hours > 3 || temp_hours <= 0 || 
+           floor(temp_hours) != temp_hours) {  // เช็คว่าเป็นจำนวนเต็มหรือไม่
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        
+        if (floor(temp_hours) != temp_hours) {
+            cout << "Please enter whole numbers only!" << endl;
+        } else {
+            cout << "Invalid choice! Limit 3 hours. Try again." << endl;
+        }
+        cout << "Enter hours (limit 3 hours): ";
+    }
+    hours = static_cast<int>(temp_hours);  // แปลงเป็น int หลังจากตรวจสอบแล้ว
+    bool isMember = checkMembership(name);
+    cout << "Member status: " << (isMember ? "Yes" : "No") << endl;
+    cout << "Confirm booking? (Y/N): ";
+    cin >> confirm;
+    if (confirm == 'Y' || confirm == 'y') {
+        bool canBook = false;
+        // เช็คเฉพาะประเภทห้องที่ต้องการจอง
+        if (roomType == "S" && settings.smallRoomCount > 0) {
+            canBook = true;
+            settings.smallRoomCount--;
+        } else if (roomType == "M" && settings.mediumRoomCount > 0) {
+            canBook = true;
+            settings.mediumRoomCount--;
+        } else if (roomType == "L" && settings.largeRoomCount > 0) {
+            canBook = true;
+            settings.largeRoomCount--;
+        }
+
+        if (canBook) {
+            bm.bookRoom(name, roomType, hours, isMember);
+        } else {
+            cout << "This Room type is fulled , Wait for someone cancel" << endl;
+        }
+    } else {
+        cout << "Booking canceled." << endl;
+    }
+}
 
 int adminoruser() {
     system("cls");
@@ -183,6 +377,7 @@ int adminoruser() {
         cout << "Invalid input" << endl;
     }
 }
+
 
 int main() {
     system("cls");
@@ -326,9 +521,9 @@ int main() {
                 else if (choice == 3){
                     bool bookingMenu = true;
                     while (bookingMenu) {
-                        system("cls");
                         cout << "==========================" << endl;
                         cout << "Here are our booking" << endl;
+                        cout << "==========================" << endl;
                         cout << "Booking (1)" << endl;
                         cout << "Exit (2)"<< endl;
                         int choice_book;
@@ -337,7 +532,7 @@ int main() {
                         
                         if (choice_book == 1){
                             system("cls");
-                            bookRoom();
+                            Booking_System(settings);
                         }
                         else if (choice_book == 2){
                             bookingMenu = false;
