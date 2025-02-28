@@ -10,6 +10,7 @@
 #include"intro.cpp"
 #include"Membership.cpp"
 #include"data.cpp"
+#include"Cancel_booking.cpp"
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
@@ -424,9 +425,41 @@ int main() {
                 cout << "6. Exit" << endl;
                 cout << "Please select an option: ";
                 int choice;
-                cin >> choice;   
+                cin >> choice; 
                 
-                if (choice == 2) {
+                if (choice == 1) {
+                    bool check = true;
+                    while (check) {
+                        cout << "==========================" << endl;
+                        cout << "Here are our service\n";
+                        cout << "New Memberships (1)" << endl;
+                        cout << "Login Memberships (2)" << endl;
+                        cout << "Edit Memberships (3)" << endl;
+                        cout << "Exit (4)" << endl;
+                        cout << "Please choose the service you want to use: ";
+                        int choice_member;
+                        cin >> choice_member;    
+                        
+                        if (choice_member == 1) {
+                            new_membership();
+                        }
+                        else if (choice_member == 2) {
+                            login_membership();
+                        }
+                        else if (choice_member == 3) {
+                            edit_membership();
+                        }
+                        else if (choice_member == 4) {
+                            user();
+                            check = false;
+                        }
+                        else {
+                            cout << "Invalid choice! Please try again." << endl;
+                        }
+                    }
+                }
+                
+                else if (choice == 2) {
                     system("cls");
                     bool viewRoomInfo = true;
                     while (viewRoomInfo) {
@@ -507,40 +540,7 @@ int main() {
                         } while (!validContinueChoice);
                     }
                 }
-                else if (choice == 1) {
-                    bool check = true;
-                    while (check) {
-                        cout << "==========================" << endl;
-                        cout << "Here are our service\n";
-                        cout << "New Memberships (1)" << endl;
-                        cout << "Login Memberships (2)" << endl;
-                        cout << "Edit Memberships (3)" << endl;
-                        cout << "Exit (4)" << endl;
-                        cout << "Please choose the service you want to use: ";
-                        int choice_member;
-                        cin >> choice_member;    
-                        
-                        if (choice_member == 1) {
-                            new_membership();
-                        }
-                        else if (choice_member == 2) {
-                            login_membership();
-                        }
-                        else if (choice_member == 3) {
-                            edit_membership();
-                        }
-                        else if (choice_member == 4) {
-                            user();
-                            check = false;
-                        }
-                        else {
-                            cout << "Invalid choice! Please try again." << endl;
-                        }
-                    }
-                }
-                else if (choice == 6) {
-                    userMenuRunning = false;
-                }
+                
                 else if (choice == 3){
                     bool bookingMenu = true;
                     while (bookingMenu) {
@@ -638,7 +638,7 @@ int main() {
                                 }
                                 file.close(); 
                                 break;
-                }
+                        }
                         //Add the logic for checking the queue here
                         cout << "=====================================" << endl;
                         cout << "Do you want to check the queue again?"<< endl;
@@ -649,8 +649,8 @@ int main() {
                             //break;
                             checkingQueue = false;
                         }
-                    } while (!validInput);
-            }
+                        } while (!validInput);
+                    }
                 }
                 else if (choice == 6) {
                     userMenuRunning = false;
