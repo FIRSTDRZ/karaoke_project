@@ -10,7 +10,7 @@
 #include"intro.cpp"
 #include"Membership.cpp"
 #include"data.cpp"
-#include"Cancel_booking.cpp"
+//#include"Cancel_booking.cpp"
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
@@ -399,9 +399,9 @@ int main() {
     intro();
     KaraokeAdmin admin;
     KaraokeAdmin::RoomSettings settings;
-    int defult_small = settings.smallRoomCount;
-    int defult_medium = settings.mediumRoomCount;
-    int defult_large = settings.largeRoomCount;
+    int defult_small = 0;
+    int defult_medium = 0;
+    int defult_large = 0;
     
     bool running = true;
     while(running) {
@@ -409,6 +409,9 @@ int main() {
         
         if (userType == 1) {
             settings = admin.startAdmin();
+            defult_small = settings.smallRoomCount;
+            defult_medium = settings.mediumRoomCount;
+            defult_large = settings.largeRoomCount;
         }
         else if (userType == 2) {
             bool userMenuRunning = true;
