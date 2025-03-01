@@ -10,7 +10,7 @@
 #include"intro.cpp"
 #include"Membership.cpp"
 #include"data.cpp"
-//#include"Cancel_booking.cpp"
+#include"Cancel_booking.cpp"
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
@@ -360,6 +360,71 @@ void Booking_System(KaraokeAdmin::RoomSettings& settings) {  // รับ settin
     }
 }
 
+void cancel_member() {
+    ifstream inputfile("booking.txt");
+    if (!inputfile.is_open()) {
+        cerr << "can't open file" << endl;
+        return; // จบการทำงานโปรแกรมด้วยรหัสผิดพลาด
+    }
+
+    // สร้าง vector เพื่อเก็บรหัสการจองห้อง
+    vector<string> bookingcodes;
+
+    // อ่านข้อมูลจากไฟล์ทีละบรรทัด
+    string line;
+    while (getline(inputfile, line)) {
+        // ใช้ stringstream เพื่อแยกข้อมูลในบรรทัด
+        stringstream ss(line);
+        string firstValue;
+
+        // อ่านค่าแรกก่อนเครื่องหมาย ','
+        getline(ss, firstValue, ',');
+
+        // เพิ่มค่าแรกเข้าไปใน vector
+        bookingcodes.push_back(firstValue);
+    }
+
+    // ปิดไฟล์หลังจากอ่านเสร็จ
+    inputfile.close();
+
+    bool validChoice = false;
+    while (!validChoice) {
+        // รหัสการจองห้องที่ต้องการตรวจสอบ
+        string roomBookingCode;
+        cout << "Enter the room booking code: ";
+        cin >> roomBookingCode;
+
+        // ตรวจสอบว่ารหัสการจองห้องมีอยู่ในรายการหรือไม่
+        if (checkRoomBookingCode(roomBookingCode, bookingcodes)) {
+            cout << "Room booking code found" << endl;
+            cout << "==========================" << endl;
+
+            cout << "Do you want to cancel this booking?" << endl;
+            cout << "1. Yes" << endl;
+            cout << "2. No" << endl;
+            cout << "Please select (1-2): ";
+
+            int choice_cancel;
+            cin >> choice_cancel;
+
+            if (choice_cancel == 1) {
+                // เรียกใช้ฟังก์ชันลบบรรทัด
+                deleteBookingLine(roomBookingCode);
+                cout << "cancel completed";
+                validChoice = true;
+            } else if (choice_cancel == 2) {
+                cout << "Operation cancelled" << endl;
+                validChoice = false;
+            } else {
+                cout << "Invalid choice. Please try again." << endl;
+                validChoice = false;
+            }
+        } else {
+            cout << "Room booking code not found" << endl;
+        }
+    }
+}
+
 int adminoruser() {
     system("cls");
     int user_type = 0;
@@ -568,6 +633,10 @@ int main() {
                         }
                         
                     }
+                }
+                else if (choice == 4) {
+                    system("cls");
+                    cancel_member();
                 }
                 else if (choice == 5) {
                     system("cls");
