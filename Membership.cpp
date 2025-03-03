@@ -157,33 +157,3 @@ void edit_membership() {
     cout << "Invalid name or password!" << endl;
 }
 
-// int main() {
-//     while (true) {
-//         cout << "==========================" << endl;
-//         cout << "นี่คือบริการสำหรับสมาชิกของเรา\n";
-//         cout << "สมัครสมาชิกใหม่ (1)" << endl;
-//         cout << "ล็อคอินเข้าสู่ระบบ (2)" << endl;
-//         cout << "แก้ไขสมาชิก (3)" << endl;
-//         cout << "ออก (4)" << endl;
-//         cout << "โปรดเลือกบริการที่คุณต้องการ: ";
-//         int choice_member;
-//         cin >> choice_member;    
-
-//         switch (choice_member) {
-//             case 1:
-//                 new_membership();
-//                 break;
-//             case 2:
-//                 login_membership();
-//                 break;
-//             case 3:
-//                 edit_membership();
-//                 break;
-//             case 4:
-//                 cout << "Exiting the program. Goodbye!" << endl;
-//                 return 0;
-//             default:
-//                 cout << "Invalid choice! Please try again." << endl;
-//         }
-//     }
-// }

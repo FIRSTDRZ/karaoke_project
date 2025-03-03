@@ -1,3 +1,0 @@
-jeng,M,2,0
-bestlm,L,2,Member
-ice,L,2,Not Member
