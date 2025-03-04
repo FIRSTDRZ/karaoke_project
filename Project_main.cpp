@@ -541,7 +541,12 @@ int main() {
                             if (cin.fail()) {
                                 cin.clear();
                                 cin.ignore(10000, '\n');
+                                system("cls");
                                 cout << "Invalid input. Please enter a number between 1-3" << endl;
+                                sleep(2);
+                                system("cls");
+                                viewRoom();
+
                             } else if (choice_room >= 1 && choice_room <= 3) {
                                 validInput = true;
                             } else {
@@ -592,7 +597,11 @@ int main() {
                             if (cin.fail()) {
                                 cin.clear();
                                 cin.ignore(10000, '\n');
+                                system("cls");
                                 cout << "Invalid input. Please enter 1 or 2." << endl;
+                                sleep(2);
+                                system("cls");
+                                continueviewRoom();
                             } else if (continueChoice == 1 || continueChoice == 2) {
                                 validContinueChoice = true;
                                 if (continueChoice == 2) {
