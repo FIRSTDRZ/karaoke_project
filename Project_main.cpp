@@ -610,6 +610,7 @@ int main() {
                 }
                 
                 else if (choice == 3){
+                    system("cls");
                     bool bookingMenu = true;
                     while (bookingMenu) {
                         cout << "==========================" << endl;
