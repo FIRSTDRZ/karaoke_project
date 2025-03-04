@@ -663,81 +663,82 @@ int main() {
                                 system("cls");
                                 viewQueue();
                             }
-                            ifstream file("booking.txt");
-                            string line;
-                            switch (choice_room) {
-                                case 1:
-                                    system("cls");
-                                    if (!file) {
-                                        cerr << "Unable to open file!" << endl;
-                                        return 1; // Exit the program if the file cannot be opened
-                                    }
-                                    while (getline(file, line)) {
-                                        // Find the first non-space or non-tab character
-                                        size_t first_char = line.find_first_not_of(" \t");
-                                        // Check if the line starts with 'S' or 's'
-                                        if (first_char != string::npos && (line[first_char] == 'S' || line[first_char] == 's')) {
-                                            cout << line << endl; // Display the line that starts with 'S' or 's'
-                                        }
-                                    }
-                                    file.close(); 
-                                    break;
-                                case 2:
-                                    system("cls");
-                                    if (!file) {
-                                        cerr << "Unable to open file!" << endl;
-                                        return 1; // Exit the program if the file cannot be opened
-                                    }
-                                    while (getline(file, line)) {
-                                        size_t first_char = line.find_first_not_of(" \t");
-                                        if (first_char != string::npos && (line[first_char] == 'M' || line[first_char] == 'm')) {
-                                            cout << line << endl; 
-                                        }
-                                    }
-                                    file.close(); 
-                                    break;
-
-                                case 3:
-                                    system("cls");
-                                    if (!file) {
-                                        cerr << "Unable to open file!" << endl;
-                                        return 1; // Exit the program if the file cannot be opened
-                                    }
-                                    while (getline(file, line)) {
-                                        size_t first_char = line.find_first_not_of(" \t");
-                                        if (first_char != string::npos && (line[first_char] == 'L' || line[first_char] == 'l')) {
-                                            cout << line << endl; 
-                                        }
-                                    }
-                                    file.close(); 
-                                    break;
-                            }
-                            // Add the logic for checking the queue here
-                            cout << "=====================================" << endl;
-                            cout << "Do you want to check the queue again?" << endl;
-                            cout << "(Yes = 1 | No = 0): ";
-                            int checkAgain;
-                            bool validCheckAgain = false;
-                            do {
-                                cin >> checkAgain;
-                                if (cin.fail() || (checkAgain != 0 && checkAgain != 1)) {
-                                    cin.clear();
-                                    cin.ignore(10000, '\n');
-                                    system("cls");
-                                    cout << "Invalid input! Please enter 1 or 0: "<< endl;
-                                    cout << "=====================================" << endl;
-                                    cout << "Do you want to check the queue again?" << endl;
-                                    cout << "(Yes = 1 | No = 0): ";
-                                    sleep(2);
-                                } else {
-                                    validCheckAgain = true;
-                                }
-                            } while (!validCheckAgain);
-
-                            if (checkAgain == 0) {
-                                checkingQueue = false;
-                            }
                         } while (!validInput);
+
+                        ifstream file("booking.txt");
+                        string line;
+                        switch (choice_room) {
+                            case 1:
+                                system("cls");
+                                if (!file) {
+                                    cerr << "Unable to open file!" << endl;
+                                    return 1; // Exit the program if the file cannot be opened
+                                }
+                                while (getline(file, line)) {
+                                    // Find the first non-space or non-tab character
+                                    size_t first_char = line.find_first_not_of(" \t");
+                                    // Check if the line starts with 'S' or 's'
+                                    if (first_char != string::npos && (line[first_char] == 'S' || line[first_char] == 's')) {
+                                        cout << line << endl; // Display the line that starts with 'S' or 's'
+                                    }
+                                }
+                                file.close(); 
+                                break;
+                            case 2:
+                                system("cls");
+                                if (!file) {
+                                    cerr << "Unable to open file!" << endl;
+                                    return 1; // Exit the program if the file cannot be opened
+                                }
+                                while (getline(file, line)) {
+                                    size_t first_char = line.find_first_not_of(" \t");
+                                    if (first_char != string::npos && (line[first_char] == 'M' || line[first_char] == 'm')) {
+                                        cout << line << endl; 
+                                    }
+                                }
+                                file.close(); 
+                                break;
+
+                            case 3:
+                                system("cls");
+                                if (!file) {
+                                    cerr << "Unable to open file!" << endl;
+                                    return 1; // Exit the program if the file cannot be opened
+                                }
+                                while (getline(file, line)) {
+                                    size_t first_char = line.find_first_not_of(" \t");
+                                    if (first_char != string::npos && (line[first_char] == 'L' || line[first_char] == 'l')) {
+                                        cout << line << endl; 
+                                    }
+                                }
+                                file.close(); 
+                                break;
+                        }
+                        // Add the logic for checking the queue here
+                        cout << "=====================================" << endl;
+                        cout << "Do you want to check the queue again?" << endl;
+                        cout << "(Yes = 1 | No = 0): ";
+                        int checkAgain;
+                        bool validCheckAgain = false;
+                        do {
+                            cin >> checkAgain;
+                            if (cin.fail() || (checkAgain != 0 && checkAgain != 1)) {
+                                cin.clear();
+                                cin.ignore(10000, '\n');
+                                system("cls");
+                                cout << "Invalid input! Please enter 1 or 0: "<< endl;
+                                cout << "=====================================" << endl;
+                                cout << "Do you want to check the queue again?" << endl;
+                                cout << "(Yes = 1 | No = 0): ";
+                                sleep(2);
+                            } else {
+                                validCheckAgain = true;
+                            }
+                        } while (!validCheckAgain);
+
+                        if (checkAgain == 0) {
+                            checkingQueue = false;
+                        }
                     }
                 }
                 else if (choice == 6) {
